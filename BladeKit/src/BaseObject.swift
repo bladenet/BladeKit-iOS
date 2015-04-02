@@ -9,5 +9,6 @@
 import Foundation
 
 public class BaseObject {
-    // anything?
+    public init() {
+    }
 }
