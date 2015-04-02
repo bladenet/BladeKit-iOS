@@ -1,0 +1,6 @@
+BladeKit.xcodeproj/xcuserdata
+BladeKit.xcodeproj/project.xcworkspace
+build
+*.xcuserdata
+xcuserdata
+*.DS_Store
