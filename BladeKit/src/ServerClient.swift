@@ -25,6 +25,19 @@ public class ServerClient {
         return Static.instance
     }
     
+    // MARK: - Generic Request
+    public class func performGenericRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation {
+        // TODO:(doug) Actually wire this up
+        let op = NSOperation()
+        op.completionBlock = {
+        let dummyResp = ServerResponse()
+        completion(response: dummyResp)
+        }
+        ServerClient.enQueueOperation(op)
+        return op
+    }
+    
+    
     // MARK: NSOperationQueue convenience for subclasses
     public class func enQueueOperation(operation: NSOperation) {
         self.sharedInstance.operationQueue.addOperation(operation)

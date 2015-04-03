@@ -8,29 +8,36 @@
 
 import UIKit
 import XCTest
+import BladeKit
 
 class BladeKitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testUrlHeadersEmpty() {
+        let req = ServerRequest()
+        XCTAssert(req.headerDict.count == 0, "Test Failure")
+        XCTAssert(req.urlRequest().allHTTPHeaderFields? == nil, "Test Failure")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
+    func testUrlHeaderPopulation() {
+        let req = ServerRequest()
+        req.headerDict["Test-HTTP-Header"] = "Test HTTP Header Value"
+        XCTAssert(req.headerDict.count == 1, "Test Failure")
+        XCTAssert(req.urlRequest().allHTTPHeaderFields? != nil, "Test Failure")
+        println(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header"))
+        XCTAssert(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header") == "Test HTTP Header Value", "Test Failure")
     }
-    
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measureBlock() {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
 }

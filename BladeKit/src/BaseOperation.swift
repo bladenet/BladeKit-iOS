@@ -10,4 +10,13 @@ import Foundation
 
 public class BaseOperation : NSOperation {
     
+    public var request : ServerRequest?
+    
+    public override func main() {
+        if let urlReq = self.request?.urlRequest() {
+            //  TODO:(doug)
+            //  1 - perform request
+            //  2 - parse based on configurable parsing
+        }
+    }
 }

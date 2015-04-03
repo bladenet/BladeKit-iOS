@@ -9,8 +9,14 @@
 import Foundation
 
 public class ServerRequest : BaseObject {
+    
+    public var headerDict = Dictionary<String,String>()
+    
     public func urlRequest() -> NSMutableURLRequest {
         let req = NSMutableURLRequest()
+        for (key, value) in self.headerDict {
+            req.setValue(value, forHTTPHeaderField: key)
+        }
         return req
     }
 }
