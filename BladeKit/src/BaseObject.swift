@@ -10,5 +10,6 @@ import Foundation
 
 public class BaseObject {
     public init() {
+        // stuff?
     }
 }

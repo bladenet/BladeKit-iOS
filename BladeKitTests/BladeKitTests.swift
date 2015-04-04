@@ -12,6 +12,8 @@ import BladeKit
 
 class BladeKitTests: XCTestCase {
     
+    let opQueue = NSOperationQueue()
+    
     override func setUp() {
         super.setUp()
     }
@@ -20,6 +22,7 @@ class BladeKitTests: XCTestCase {
         super.tearDown()
     }
     
+    // MARK: - ServerRequest
     func testUrlHeadersEmpty() {
         let req = ServerRequest()
         XCTAssert(req.headerDict.count == 0, "Test Failure")
@@ -34,10 +37,27 @@ class BladeKitTests: XCTestCase {
         println(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header"))
         XCTAssert(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header") == "Test HTTP Header Value", "Test Failure")
     }
-//    func testPerformanceExample() {
-//        // This is an example of a performance test case.
-//        self.measureBlock() {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
+    
+    // MARK: - ServerOperation
+    func testServerOperationMain() {
+        // add async expectation
+        let asyncExpectation = self.expectationWithDescription("Standard Async Expectation")
+        
+        let req = ServerRequest()
+        let op = ServerOperation(request: req)
+        var test = false
+        op.completionBlock = {
+            // simple delayed test is all
+            XCTAssert(test == true, "Test Failure")
+            asyncExpectation.fulfill()
+        }
+        test = true
+        opQueue.addOperation(op)
+        self.waitForExpectationsWithTimeout(0.2, handler: { (error) -> Void in
+            if (error != nil) {
+                XCTFail("Expectation Failed with error: \(error)");
+            }
+        })
+        
+    }
 }
