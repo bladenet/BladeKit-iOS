@@ -11,9 +11,11 @@ import Foundation
 public class ServerOperation : NSOperation {
     
     public var request : ServerRequest
-    
+    public var response : ServerResponse
+
     public init(request: ServerRequest) {
         self.request = request
+        self.response = ServerResponse()
         super.init()
     }
     
