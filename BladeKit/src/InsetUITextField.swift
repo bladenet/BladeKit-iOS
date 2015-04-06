@@ -9,7 +9,7 @@
 import UIKit
 
 
-@IBDesignable class BKInsetTextField: UITextField {
+@IBDesignable class InsetUITextField: UITextField {
 
     @IBInspectable var inset: CGFloat = 10
     
