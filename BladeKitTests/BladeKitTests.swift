@@ -58,6 +58,6 @@ class BladeKitTests: XCTestCase {
                 XCTFail("Expectation Failed with error: \(error)");
             }
         })
-        
     }
+    
 }

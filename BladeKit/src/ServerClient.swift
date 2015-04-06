@@ -28,10 +28,13 @@ public class ServerClient {
     // MARK: - Generic Request
     public class func performGenericRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation {
         let op = ServerOperation(request: request)
+        let weakOp = op
         op.completionBlock = {
-            dispatch_sync(dispatch_get_main_queue(), { () -> Void in
-                completion(response: op.response)
-            })
+            if weakOp.cancelled == false {
+                dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                    completion(response: weakOp.response)
+                })
+            }
         }
         ServerClient.enQueueOperation(op)
         return op

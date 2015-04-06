@@ -11,6 +11,7 @@ import Foundation
 public class ServerRequest : BaseObject {
     
     public var headerDict = Dictionary<String,String>()
+    public var parsingClosure : ((data: NSData) -> ServerResponse)?
     
     public func urlRequest() -> NSMutableURLRequest {
         let req = NSMutableURLRequest()

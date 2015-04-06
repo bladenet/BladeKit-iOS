@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		91346A991AD2E0CF0045DADB /* InsetUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91346A981AD2E0CF0045DADB /* InsetUITextField.swift */; };
 		91346AAF1AD3177B0045DADB /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91346AAE1AD3177B0045DADB /* DesignableView.swift */; };
+		91346AB21AD329CE0045DADB /* NSError+BladeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91346AB11AD329CE0045DADB /* NSError+BladeKit.swift */; };
 		91D365911ACDCFA800D018B2 /* BladeKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 91D365901ACDCFA800D018B2 /* BladeKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91D365971ACDCFA800D018B2 /* BladeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3658B1ACDCFA800D018B2 /* BladeKit.framework */; };
 		91D3659E1ACDCFA800D018B2 /* BladeKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D3659D1ACDCFA800D018B2 /* BladeKitTests.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		91346A981AD2E0CF0045DADB /* InsetUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetUITextField.swift; sourceTree = "<group>"; };
 		91346AAE1AD3177B0045DADB /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
+		91346AB11AD329CE0045DADB /* NSError+BladeKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+BladeKit.swift"; sourceTree = "<group>"; };
 		91D3658B1ACDCFA800D018B2 /* BladeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BladeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D3658F1ACDCFA800D018B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91D365901ACDCFA800D018B2 /* BladeKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BladeKit.h; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 				91346AAE1AD3177B0045DADB /* DesignableView.swift */,
 			);
 			name = designables;
+			sourceTree = "<group>";
+		};
+		91346AB01AD329B50045DADB /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				91346AB11AD329CE0045DADB /* NSError+BladeKit.swift */,
+			);
+			name = extensions;
 			sourceTree = "<group>";
 		};
 		91D365811ACDCFA800D018B2 = {
@@ -129,6 +139,7 @@
 		91D365A71ACDCFD200D018B2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				91346AB01AD329B50045DADB /* extensions */,
 				91346A971AD2E0A50045DADB /* designables */,
 				91D365B21ACDCFFB00D018B2 /* data */,
 				91D365AA1ACDCFE700D018B2 /* ServerClient.swift */,
@@ -261,6 +272,7 @@
 				91346AAF1AD3177B0045DADB /* DesignableView.swift in Sources */,
 				91D365AD1ACDCFE700D018B2 /* BaseObject.swift in Sources */,
 				91D365B11ACDCFE700D018B2 /* ServerResponse.swift in Sources */,
+				91346AB21AD329CE0045DADB /* NSError+BladeKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,9 +10,9 @@ import Foundation
 
 public class ServerOperation : NSOperation {
     
-    public var request : ServerRequest
-    public var response : ServerResponse
-
+    public var request: ServerRequest
+    public var response: ServerResponse
+    
     public init(request: ServerRequest) {
         self.request = request
         self.response = ServerResponse()
@@ -22,7 +22,12 @@ public class ServerOperation : NSOperation {
     public override func main() {
         let urlReq = self.request.urlRequest()
         //  TODO:(doug)
-        //  1 - perform request
-        //  2 - parse based on configurable parsing
+        //  1 - perform url request
+        
+        //  run custom parsing on test data at the moment
+        if let parsing = self.request.parsingClosure {
+            self.response = parsing(data: NSData())
+        }
+        
     }
 }
