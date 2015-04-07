@@ -9,16 +9,16 @@
 
 import UIKit
 
-class DesignableView: UIView {
+public class DesignableView: UIView {
     
     var view: UIView!
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
     }
