@@ -24,6 +24,8 @@ After this, go ahead and drag the <project>.xcodeproj into the finder in your ac
 
 Your next step will be to include the BladeKit.Framework as a build dependency in your target settings. Hit the + Button, it should auto populate as XCode is now familiar with these files and this target.
 
+And finally, for device builds, you will need to add the 'Embed Framework' phase. In the target's General tab, there is an Embedded Binaries field. Add the BladeKit.framework there as well.
+
 After this, you will need to include:
 ```
 import BladeKit
