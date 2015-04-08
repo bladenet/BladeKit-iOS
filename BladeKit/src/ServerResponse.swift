@@ -10,4 +10,9 @@ import Foundation
 
 public class ServerResponse : BaseObject {
     public var error : NSError?
+    public var genericResults: [String:AnyObject] = [:]
+    
+    public func results() -> Dictionary<String,AnyObject> {
+        return self.genericResults
+    }
 }
