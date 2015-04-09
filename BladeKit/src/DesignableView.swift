@@ -29,7 +29,7 @@ public class DesignableView: UIView {
         let nib = UINib(nibName: xibName(), bundle: bundle)
         
         // Assumes UIView is top level and only object in .xib file
-        view = nib.instantiateWithOwner(self, options: nil)[0] as UIView
+        view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
         
         // use bounds not frame or it'll be offset
         view.frame = bounds
