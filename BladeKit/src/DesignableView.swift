@@ -11,7 +11,7 @@ import UIKit
 
 public class DesignableView: UIView {
     
-    var view: UIView!
+    public var view: UIView!
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
