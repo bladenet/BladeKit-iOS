@@ -45,11 +45,11 @@ public class DesignableView: UIView {
     }
     
     // This must be overridden in subclass
-    func xibName() -> String {
+    public func xibName() -> String {
         fatalError("xibName() has not been implemented")
     }
     
     // Override if you need a hook for additional setup after .xib is loaded
-    func xibSetup() {
+    public func xibSetup() {
     }
 }
