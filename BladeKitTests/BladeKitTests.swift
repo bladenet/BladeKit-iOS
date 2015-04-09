@@ -26,14 +26,14 @@ class BladeKitTests: XCTestCase {
     func testUrlHeadersEmpty() {
         let req = ServerRequest()
         XCTAssert(req.headerDict.count == 0, "Test Failure")
-        XCTAssert(req.urlRequest().allHTTPHeaderFields? == nil, "Test Failure")
+        XCTAssert(req.urlRequest().allHTTPHeaderFields == nil, "Test Failure")
     }
     
     func testUrlHeaderPopulation() {
         let req = ServerRequest()
         req.headerDict["Test-HTTP-Header"] = "Test HTTP Header Value"
         XCTAssert(req.headerDict.count == 1, "Test Failure")
-        XCTAssert(req.urlRequest().allHTTPHeaderFields? != nil, "Test Failure")
+        XCTAssert(req.urlRequest().allHTTPHeaderFields != nil, "Test Failure")
         println(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header"))
         XCTAssert(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header") == "Test HTTP Header Value", "Test Failure")
     }

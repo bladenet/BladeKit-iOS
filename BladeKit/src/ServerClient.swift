@@ -18,12 +18,7 @@ public class ServerClient {
     }()
     
     // MARK: - Singleton
-    class var sharedInstance: ServerClient {
-        struct Static {
-            static let instance : ServerClient = ServerClient()
-        }
-        return Static.instance
-    }
+    private static let sharedInstance = ServerClient()
     
     // MARK: - Generic Request
     public class func performGenericRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation {
