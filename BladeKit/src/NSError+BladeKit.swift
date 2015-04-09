@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NSError {
+public extension NSError {
     public class func errorWithDomain(domain: String, code:Int, localizedDescription:String) -> NSError {
         return NSError(domain: domain, code: code, userInfo:[NSLocalizedDescriptionKey:localizedDescription])
     }
