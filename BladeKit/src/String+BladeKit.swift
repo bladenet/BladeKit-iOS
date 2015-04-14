@@ -24,9 +24,19 @@ public extension String {
     }
     
     // Ability to pass an integer index for a string subscript
+    // Returns nill if invalid index passed
     public subscript(index: Int) -> Character? {
         get {
-            return self[advance(self.startIndex, index)]
+            if index < 0 || index > count(self) {
+                return nil
+            }
+            let idx = advance(self.startIndex, index)
+            // safety
+            if idx == self.endIndex {
+                return nil
+            } else {
+                return self[idx]
+            }
         }
     }
     

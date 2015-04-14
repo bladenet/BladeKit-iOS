@@ -21,8 +21,38 @@ class ExtensionsTests: XCTestCase {
     }
     
     // MARK: Test String Extensions
-    func testStringExtensionOne() {
-    
+    func testStringSubscriptExtensionIndexStart() {
+        let str = "cats"
+        XCTAssert(str[0] == "c", "Fail")
+    }
+
+    func testStringSubscriptExtensionIndexNegative() {
+        let str = "cats"
+        XCTAssert(str[-1] == nil, "Fail")
     }
     
+    func testStringSubscriptExtensionIndexOkay() {
+        let str = "cats"
+        XCTAssert(str[3] == "s", "Fail")
+    }
+    
+    func testStringSubscriptExtensionIndexJustOver() {
+        let str = "cats"
+        XCTAssert(str[4] == nil, "Fail")
+    }
+    
+    func testStringSubscriptExtensionIndexOverflow() {
+        let str = "cats"
+        XCTAssert(str[10] == nil, "Fail")
+    }
+    
+    func testInitialRangeValid() {
+        let str = "cats"
+        XCTAssert(str[0...2] == "cat", "Fail")
+    }
+    
+//    func testInitialRangeInValid() {
+//        let str = "cats"
+//        XCTAssert(str[-1...2] == "cat", "Fail")
+//    }
 }
