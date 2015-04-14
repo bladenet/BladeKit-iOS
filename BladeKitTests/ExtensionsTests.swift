@@ -51,8 +51,45 @@ class ExtensionsTests: XCTestCase {
         XCTAssert(str[0...2] == "cat", "Fail")
     }
     
-//    func testInitialRangeInValid() {
-//        let str = "cats"
-//        XCTAssert(str[-1...2] == "cat", "Fail")
-//    }
+    func testInitialRangeInValidStartNegative() {
+        let str = "cats"
+        XCTAssert(str[-1...2] == nil, "Fail")
+    }
+    
+    func testInitialRangeInValidStartPastEnd() {
+        let str = "cats"
+        XCTAssert(str[-10...2] == nil, "Fail")
+    }
+    
+    func testInitialRangeValidStartEqualsEnd() {
+        let str = "cats"
+        XCTAssert(str[3...3] == "s", "Fail")
+    }
+    
+    func testInitialRangeInValidEndBeyondRange() {
+        let str = "cats"
+        XCTAssert(str[3...4] == nil, "Fail")
+    }
+    
+    func testUSPhoneNumberDisplayValidWithOne() {
+        let str = "19782139963"
+        XCTAssert(str.asPhoneNumber == "1-978-213-9963", "Fail")
+    }
+    
+    func testUSPhoneNumberDisplayValidWithoutOne() {
+        let str = "9782139963"
+        println(str.asPhoneNumber)
+        XCTAssert(str.asPhoneNumber == "(978) 213-9963", "Fail")
+    }
+    
+    func testUSPhoneNumberDisplayValidLastSevenOnly() {
+        let str = "2139963"
+        println(str.asPhoneNumber)
+        XCTAssert(str.asPhoneNumber == "213-9963", "Fail")
+    }
+    
+    func testUSPhoneNumberDisplayNotFullNumber() {
+        let str = "093"
+        XCTAssert(str.asPhoneNumber == nil, "Fail")
+    }
 }
