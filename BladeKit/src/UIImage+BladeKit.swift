@@ -35,4 +35,15 @@ public extension UIImage {
         
         return newImage;
     }
+    
+    public static func getImageWithColor(color: UIColor) -> UIImage {
+        let size = CGSizeMake(1, 100)
+        var rect = CGRectMake(0, 0, size.width, size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
