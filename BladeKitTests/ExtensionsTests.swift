@@ -20,7 +20,7 @@ class ExtensionsTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: Test String Extensions
+    // MARK: Test String Extensions, Subscripts
     func testStringSubscriptExtensionIndexStart() {
         let str = "cats"
         XCTAssert(str[0] == "c", "Fail")
@@ -88,8 +88,30 @@ class ExtensionsTests: XCTestCase {
         XCTAssert(str.asPhoneNumber == "213-9963", "Fail")
     }
     
+    // MARK: Test String Extensions, Helpers
+    
     func testUSPhoneNumberDisplayNotFullNumber() {
         let str = "093"
         XCTAssert(str.asPhoneNumber == nil, "Fail")
+    }
+    
+    func testDoesContainSubstr() {
+        let str = "longstr"
+        XCTAssertTrue(str.doesContainSubstring("long"), "Fail")
+    }
+    
+    func testDoesNotContainSubstr() {
+        let str = "longstr"
+        XCTAssertFalse(str.doesContainSubstring("cat"), "Fail")
+    }
+    
+    func testDoesContainBackwardFragment() {
+        let str = "longstr"
+        XCTAssertFalse(str.doesContainSubstring("longstrextending"), "Fail")
+    }
+    
+    func testDoesNotContainEmptyStr() {
+        let str = "longstr"
+        XCTAssertFalse(str.doesContainSubstring(""), "Fail")
     }
 }

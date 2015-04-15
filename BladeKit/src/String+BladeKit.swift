@@ -71,8 +71,15 @@ public extension String {
         return formatted
     }
     
+    public func doesContainSubstring(subsr: String) -> Bool {
+        return (self.lowercaseString.rangeOfString(subsr.lowercaseString) != nil)
+    }
+
+    
     // Get substring between start and end, inclusive on for the start, non-inclusive for the end
     private func simpleSubstring(start:Int, end:Int) -> String? {
         return self.substringWithRange(Range<String.Index>(start: advance(self.startIndex, start), end: advance(self.startIndex, end)))
     }
+    
+    
 }
