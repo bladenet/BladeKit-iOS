@@ -6,6 +6,8 @@
 //  Migrated to BladeKit by Doug on 4/6/15.
 //  Copyright (c) 2015 Blade. All rights reserved.
 //
+//  Base class for all IBDesignables.
+//
 
 import UIKit
 
@@ -26,10 +28,10 @@ public class DesignableView: UIView {
     private func loadXib() {
         
         let bundle = NSBundle(forClass: self.dynamicType)
-        let nib = UINib(nibName: xibName(), bundle: bundle)
+        let xib = UINib(nibName: xibName(), bundle: bundle)
         
         // Assumes UIView is top level and only object in .xib file
-        view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        view = xib.instantiateWithOwner(self, options: nil)[0] as! UIView
         
         // use bounds not frame or it'll be offset
         view.frame = bounds
@@ -40,7 +42,7 @@ public class DesignableView: UIView {
         // Do any custom setup
         xibSetup()
         
-        // Adding custom subview on top of our view (over any custom drawing > see note below)
+        // Add view we just loaded from .xib to ourself
         addSubview(view)
     }
     
