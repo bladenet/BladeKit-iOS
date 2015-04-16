@@ -9,6 +9,9 @@
 import Foundation
 
 public extension UIColor {
+    
+    private static let notAllowed = NSCharacterSet.alphanumericCharacterSet().invertedSet
+    
     public static func colorFromInitials(initials: String) -> UIColor {
         var total = 0.0
         var index = 0.0
@@ -18,7 +21,9 @@ public extension UIColor {
             }
             return UnicodeScalar(1) // useless
         }
-        for codeUnit in initials.unicodeScalars {
+        // clean
+        let cleanInitials = initials.stringByTrimmingCharactersInSet(notAllowed)
+        for codeUnit in cleanInitials.unicodeScalars {
             let code = codeUnit.value - utf8A.value
             let denom = Double(pow(26.0, index + 1.0))
             let addition = Double(code) / denom
