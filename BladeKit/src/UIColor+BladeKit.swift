@@ -22,7 +22,7 @@ public extension UIColor {
             return UnicodeScalar(1) // useless
         }
         // clean
-        let cleanInitials = initials.stringByTrimmingCharactersInSet(notAllowed)
+        let cleanInitials = initials.stringByTrimmingCharactersInSet(notAllowed).uppercaseString
         for codeUnit in cleanInitials.unicodeScalars {
             if index >= 2.0 {
                 break
