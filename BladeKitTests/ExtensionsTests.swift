@@ -114,4 +114,61 @@ class ExtensionsTests: XCTestCase {
         let str = "longstr"
         XCTAssertFalse(str.doesContainSubstring(""), "Fail")
     }
+    
+    // MARK: UIColor Extensions, Test
+    func testValidCharsForOneInital() {
+        let initials = "B"
+        let result = UIColor.colorFromInitials(initials)
+        var hue: CGFloat = 0.0
+        result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        XCTAssert(hue > 0.0352941176470588, "Fail")
+        XCTAssert(hue < 0.0352941176470600, "Fail")
+    }
+    
+    func testValidCharsForInitals() {
+        let initials = "ZA"
+        let result = UIColor.colorFromInitials(initials)
+        var hue: CGFloat = 0.0
+        result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        XCTAssert(hue > 0.964705882352940, "Fail")
+        XCTAssert(hue < 0.964705882352947, "Fail")
+    }
+    
+    func testInValidCharsForInitalsOne() {
+        let initials = "()"
+        let result = UIColor.colorFromInitials(initials)
+        var hue: CGFloat = 0.0
+        result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        XCTAssert(hue > 0.99999999, "Fail")
+        XCTAssert(hue < 1.00000001, "Fail")
+    }
+    
+    func testInValidCharsForInitalsTwo() {
+        let initials = ""
+        let result = UIColor.colorFromInitials(initials)
+        var hue: CGFloat = 0.0
+        result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        println("hue \(hue)")
+        XCTAssert(hue > 0.99999999, "Fail")
+        XCTAssert(hue < 1.00000001, "Fail")
+    }
+    
+    func testInValidCharsForInitalsThree() {
+        let initials = "😃 😹"
+        let result = UIColor.colorFromInitials(initials)
+        var hue: CGFloat = 0.0
+        result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        println("hue \(hue)")
+        XCTAssert(hue > 0.99999999, "Fail")
+        XCTAssert(hue < 1.00000001, "Fail")
+    }
+    
+    func testInValidCharsForInitalsFour() {
+        let initials = "か礯 ヰを訦 ヒェ䋧 秞囥勯 襩㛤ㄨ㠣榊 ヴャざ襪へ姥 绨ぺ樧 䄦ラ 秦榯奯駪ちょ 椩祚婨谢µ, 壎榚 つぞ䣊と䪥 び"
+        let result = UIColor.colorFromInitials(initials)
+        var hue: CGFloat = 0.0
+        result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        XCTAssert(hue > 0.117647058823520, "Fail")
+        XCTAssert(hue < 0.117647058823535, "Fail")
+    }
 }

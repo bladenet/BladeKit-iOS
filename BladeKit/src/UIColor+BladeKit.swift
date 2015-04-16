@@ -24,7 +24,15 @@ public extension UIColor {
         // clean
         let cleanInitials = initials.stringByTrimmingCharactersInSet(notAllowed)
         for codeUnit in cleanInitials.unicodeScalars {
-            let code = codeUnit.value - utf8A.value
+            if index >= 2.0 {
+                break
+            }
+            var codeValue = codeUnit.value
+            if codeValue > 300 {
+                // some unusual character, lets just pick something
+                codeValue = 68
+            }
+            let code = codeValue - utf8A.value
             let denom = Double(pow(26.0, index + 1.0))
             let addition = Double(code) / denom
             total += addition
