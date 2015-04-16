@@ -171,4 +171,13 @@ class ExtensionsTests: XCTestCase {
         XCTAssert(hue > 0.117647058823520, "Fail")
         XCTAssert(hue < 0.117647058823535, "Fail")
     }
+    
+    func testInvalidCharsForInitialsFive() {
+        let initials = "тคคяє Zคмєєภ թคя - ค мσ√เє ๒єyσภ∂ ฬσя∂ร !!!"
+        let result = UIColor.colorFromInitials(initials)
+        var hue: CGFloat = 0.0
+        result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        XCTAssert(hue > 0.117647058823520, "Fail")
+        XCTAssert(hue < 0.117647058823535, "Fail")
+    }
 }
