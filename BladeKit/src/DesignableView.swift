@@ -39,6 +39,11 @@ public class DesignableView: UIView {
         // Make the view stretch with containing view
         view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         
+        // Promote the background color used in the designable xib to the background color for the view itself
+        // This allows the consumer of the designable to set the background color in their xib file
+        self.backgroundColor = view.backgroundColor
+        view.backgroundColor = UIColor.clearColor()
+        
         // Do any custom setup
         xibSetup()
         
