@@ -32,7 +32,7 @@ public extension UIColor {
                 // some unusual character, lets just pick something
                 codeValue = 68
             }
-            let code = codeValue - utf8A.value
+            let code = codeValue &- utf8A.value
             let denom = Double(pow(26.0, index + 1.0))
             let addition = Double(code) / denom
             total += addition
