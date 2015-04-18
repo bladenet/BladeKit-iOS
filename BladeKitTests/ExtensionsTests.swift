@@ -180,4 +180,13 @@ class ExtensionsTests: XCTestCase {
         XCTAssert(hue > 0.117647058823520, "Fail")
         XCTAssert(hue < 0.117647058823535, "Fail")
     }
+    
+    func testInvalidOverflowForInitials() {
+        let initials = "0S"
+        let result = UIColor.colorFromInitials(initials)
+        var hue: CGFloat = 0.0
+        result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        XCTAssert(hue > 0.99999999, "Fail")
+        XCTAssert(hue < 1.00000001, "Fail")
+    }
 }

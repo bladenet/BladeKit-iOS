@@ -15,7 +15,7 @@ public extension UIColor {
     public static func colorFromInitials(initials: String) -> UIColor {
         var total = 0.0
         var index = 0.0
-        var utf8A: UnicodeScalar {
+        var scalarA: UnicodeScalar {
             for code in "A".unicodeScalars {
                 return code
             }
@@ -32,7 +32,7 @@ public extension UIColor {
                 // some unusual character, lets just pick something
                 codeValue = 68
             }
-            let code = codeValue &- utf8A.value
+            let code = codeValue &- scalarA.value
             let denom = Double(pow(26.0, index + 1.0))
             let addition = Double(code) / denom
             total += addition
