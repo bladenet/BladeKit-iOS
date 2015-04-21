@@ -180,7 +180,7 @@ class ExtensionsTests: XCTestCase {
         XCTAssert(hue > 0.117647058823520, "Fail")
         XCTAssert(hue < 0.117647058823535, "Fail")
     }
-    
+
     func testInvalidOverflowForInitials() {
         let initials = "0S"
         let result = UIColor.colorFromInitials(initials)
@@ -188,5 +188,45 @@ class ExtensionsTests: XCTestCase {
         result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
         XCTAssert(hue > 0.99999999, "Fail")
         XCTAssert(hue < 1.00000001, "Fail")
+    }
+    
+    // MARK: NSDate Extensions
+    func testGenericDateDisplay() {
+        let date = NSDate(timeIntervalSince1970: 100.0)
+        XCTAssert(date.genericDateDisplay() == "12/31/69, 7:01 PM", "Fail")
+    }
+    
+    func testRelativeDateDisplayRecent() {
+        let date = NSDate(timeIntervalSinceNow: -1.0)
+        XCTAssert(date.relativeTimeDisplay() == "just now", "Fail")
+    }
+    
+    func testRelativeDateDisplaySeconds() {
+        let date = NSDate(timeIntervalSinceNow: -15.0)
+        println(date.relativeTimeDisplay())
+        XCTAssert(date.relativeTimeDisplay() == "15 seconds ago", "Fail")
+    }
+    
+    func testRelativeDateDisplayMinute() {
+        let date = NSDate(timeIntervalSinceNow: -65.0)
+        XCTAssert(date.relativeTimeDisplay() == "1 minute ago", "Fail")
+    }
+    
+    func testRelativeDateDisplayHours() {
+        let date = NSDate(timeIntervalSinceNow: -60.0 * 60.0 * 15.0)
+        println(date.relativeTimeDisplay())
+        XCTAssert(date.relativeTimeDisplay() == "15 hours ago", "Fail")
+    }
+    
+    func testRelativeDateDisplayDays() {
+        let date = NSDate(timeIntervalSinceNow: -60.0 * 60.0 * 24.0 * 15.0)
+        println(date.relativeTimeDisplay())
+        XCTAssert(date.relativeTimeDisplay() == "15 days ago", "Fail")
+    }
+    
+    func testRelativeDateDisplayMonths() {
+        let date = NSDate(timeIntervalSinceNow: -60.0 * 60.0 * 24.0 * 30.0 * 2.0)
+        println(date.relativeTimeDisplay())
+        XCTAssert(date.relativeTimeDisplay() == "2 months ago", "Fail")
     }
 }

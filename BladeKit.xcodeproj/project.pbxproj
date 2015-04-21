@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9107DCD41AE6F449003418D3 /* NSDate+BladeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107DCD31AE6F449003418D3 /* NSDate+BladeKit.swift */; };
 		91346A991AD2E0CF0045DADB /* InsetUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91346A981AD2E0CF0045DADB /* InsetUITextField.swift */; };
 		91346AAF1AD3177B0045DADB /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91346AAE1AD3177B0045DADB /* DesignableView.swift */; };
 		91346AB21AD329CE0045DADB /* NSError+BladeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91346AB11AD329CE0045DADB /* NSError+BladeKit.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9107DCD31AE6F449003418D3 /* NSDate+BladeKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+BladeKit.swift"; sourceTree = "<group>"; };
 		91346A981AD2E0CF0045DADB /* InsetUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetUITextField.swift; sourceTree = "<group>"; };
 		91346AAE1AD3177B0045DADB /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		91346AB11AD329CE0045DADB /* NSError+BladeKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+BladeKit.swift"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				9172ED1D1ADD98BC00F12045 /* String+BladeKit.swift */,
 				914256181ADDB19300A301FB /* UIColor+BladeKit.swift */,
 				9142561E1ADDB1C200A301FB /* UIImage+BladeKit.swift */,
+				9107DCD31AE6F449003418D3 /* NSDate+BladeKit.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				91346AAF1AD3177B0045DADB /* DesignableView.swift in Sources */,
 				91D365AD1ACDCFE700D018B2 /* BaseObject.swift in Sources */,
 				91D365B11ACDCFE700D018B2 /* ServerResponse.swift in Sources */,
+				9107DCD41AE6F449003418D3 /* NSDate+BladeKit.swift in Sources */,
 				9172ED1E1ADD98BC00F12045 /* String+BladeKit.swift in Sources */,
 				914256191ADDB19300A301FB /* UIColor+BladeKit.swift in Sources */,
 				91346AB21AD329CE0045DADB /* NSError+BladeKit.swift in Sources */,
