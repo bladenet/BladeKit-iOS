@@ -11,7 +11,21 @@ import Foundation
 public class ServerRequest : BaseObject {
     
     public var headerDict = Dictionary<String,String>()
-    public var parsingClosure : ((data: NSData) -> ServerResponse)?
+    public var parsingClosure : ((data: NSData?, error: NSError?) -> ServerResponse) = {data, error in
+        let sr = ServerResponse()
+        if error != nil || data == nil {
+            sr.error = error
+            
+        } else {
+            if let rd = data {
+                // default to JSON Serialization
+                if let parsed: AnyObject = NSJSONSerialization.JSONObjectWithData(rd, options: NSJSONReadingOptions.MutableContainers, error: nil) {
+                    sr.genericResults = ["results":parsed]
+                }
+            }
+        }
+        return sr
+    }
     public var url : NSURL?
     
     public func urlRequest() -> NSMutableURLRequest {
