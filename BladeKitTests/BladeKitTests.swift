@@ -69,11 +69,36 @@ class BladeKitTests: XCTestCase {
         req.parsingClosure = { data in
             return ServerResponse()
         }
-        ServerClient.performGenericRequest(req, repeatInterval: 0) { (response) -> Void in
+        ServerClient.performGenericRequest(req){ (response) -> Void in
             XCTAssert(response.rawResponse?.statusCode == 200, "Fail")
             asyncExpectation.fulfill()
         }
         self.waitForExpectationsWithTimeout(0.6, handler: { (error) -> Void in
+            if (error != nil) {
+                XCTFail("Expectation Failed with error: \(error)");
+            }
+        })
+    }
+    
+    func testServerOperationRepeatingUrl() {
+        // add async expectation
+        let asyncExpectation = self.expectationWithDescription("Standard Async Expectation")
+        var count = 0
+        let req = ServerRequest()
+        req.url = NSURL(string: "https://google.com")
+        req.parsingClosure = { data in
+            return ServerResponse()
+        }
+        let timer = ServerClient.performGenericRepeatingRequest(req, timeInterval:0.2){ (response) -> Void in
+            XCTAssert(response.rawResponse?.statusCode == 200, "Fail")
+            count++
+            println(count)
+            if count > 1 {
+                asyncExpectation.fulfill()
+            }
+        }
+        self.waitForExpectationsWithTimeout(0.8, handler: { (error) -> Void in
+            timer.invalidate()
             if (error != nil) {
                 XCTFail("Expectation Failed with error: \(error)");
             }

@@ -21,7 +21,7 @@ public class ServerClient {
     private static let sharedInstance = ServerClient()
     
     // MARK: - Generic Request
-    public class func performGenericRequest(request: ServerRequest, repeatInterval: NSTimeInterval = 0.0, completion:(response: ServerResponse) -> Void) -> NSOperation {
+    public class func performGenericRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation {
         let op = ServerOperation(request: request)
         let weakOp = op
         op.completionBlock = { [unowned op] in
@@ -33,6 +33,16 @@ public class ServerClient {
         }
         ServerClient.enQueueOperation(op)
         return op
+    }
+    
+    public class func performGenericRepeatingRequest(request: ServerRequest, timeInterval:NSTimeInterval, completion:(response: ServerResponse) -> Void) -> NSTimer {
+        let fireDate = timeInterval + CFAbsoluteTimeGetCurrent()
+        let timer = NSTimer.schedule(repeatInterval: timeInterval, handler:{ nTimer in
+            if nTimer.valid {
+                ServerClient.performGenericRequest(request, completion:completion)
+            }
+        })
+        return timer
     }
     
     // MARK: NSOperationQueue convenience
