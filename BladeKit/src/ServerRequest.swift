@@ -11,6 +11,7 @@ import Foundation
 public class ServerRequest : BaseObject {
     
     public var headerDict = Dictionary<String,String>()
+    public var url : NSURL?
     public var parsingClosure : ((data: NSData?, error: NSError?) -> ServerResponse) = {data, error in
         let sr = ServerResponse()
         if error != nil || data == nil {
@@ -26,7 +27,6 @@ public class ServerRequest : BaseObject {
         }
         return sr
     }
-    public var url : NSURL?
     
     public func urlRequest() -> NSMutableURLRequest {
         let req = NSMutableURLRequest()
