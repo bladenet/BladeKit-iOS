@@ -21,13 +21,18 @@ public class ServerOperation : NSOperation {
     
     public override func main() {
         let urlReq = self.request.urlRequest()
-        //  TODO:(doug)
-        //  1 - perform url request
-        
-        //  run custom parsing on test data at the moment
-        if let parsing = self.request.parsingClosure {
-            self.response = parsing(data: NSData())
+        var err: NSError?
+        var response: NSURLResponse?
+        let possibleData = NSURLConnection.sendSynchronousRequest(urlReq, returningResponse: &response, error: &err)
+        if let data = possibleData {
+            //  run custom parsing on test data at the moment
+            if let parsing = self.request.parsingClosure {
+                self.response = parsing(data: data)
+                self.response.rawResponse = response as? NSHTTPURLResponse
+            }
+        } else {
+            println("Server Err:\(err)")
+            self.response.error = err
         }
-        
     }
 }

@@ -12,12 +12,14 @@ public class ServerRequest : BaseObject {
     
     public var headerDict = Dictionary<String,String>()
     public var parsingClosure : ((data: NSData) -> ServerResponse)?
+    public var url : NSURL?
     
     public func urlRequest() -> NSMutableURLRequest {
         let req = NSMutableURLRequest()
         for (key, value) in self.headerDict {
             req.setValue(value, forHTTPHeaderField: key)
         }
+        req.URL = url
         return req
     }
 }

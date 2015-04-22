@@ -10,6 +10,7 @@ import Foundation
 
 public class ServerResponse : BaseObject {
     public var error : NSError?
+    public var rawResponse : NSHTTPURLResponse?
     public var genericResults: [String:AnyObject] = [:]
     
     public func results() -> Dictionary<String,AnyObject> {
