@@ -16,7 +16,6 @@ public class ServerRequest : BaseObject {
         let sr = ServerResponse()
         if error != nil || data == nil {
             sr.error = error
-            
         } else {
             if let rd = data {
                 // default to JSON Serialization
