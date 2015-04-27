@@ -11,6 +11,11 @@ import Foundation
 public extension UIImage {
     public static func drawInitialsAsImage(initials: String, frame: CGRect, font: UIFont) -> UIImage {
         
+        if frame.size.width < 2.0 || frame.size.height < 2.0 {
+            // This is silly small, just return an empty image for now
+            return UIImage()
+        }
+        
         UIGraphicsBeginImageContextWithOptions(frame.size, true, 0.0);
         
         UIColor.colorFromInitials(initials).set()
