@@ -81,5 +81,27 @@ public extension String {
         return self.substringWithRange(Range<String.Index>(start: advance(self.startIndex, start), end: advance(self.startIndex, end)))
     }
     
+    // See if a string contains only items in the given character set
+    public func containsOnlyCharactersInSet(set: NSCharacterSet) -> Bool {
+        for character in self {
+            if !set.containsCharacter(character) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    // Convert an NSRange to a Range<String.index>
+    static func stringRangeToRange(text: String, range: NSRange) -> Range<String.Index> {
+        let start = advance(text.startIndex, range.location)
+        let end = advance(start, range.length)
+        let swiftRange = Range<String.Index>(start: start, end: end)
+        return swiftRange
+    }
+    
+    // Replace characters in range using NSRange (useful when using the UITextField delegate)
+    func stringByReplacingCharactersInRange(range: NSRange, withString replacement: String) -> String {
+        return stringByReplacingCharactersInRange(String.stringRangeToRange(self, range: range), withString: replacement)
+    }
     
 }
