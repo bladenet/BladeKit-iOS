@@ -25,7 +25,7 @@
 		91D365AF1ACDCFE700D018B2 /* ServerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D365AA1ACDCFE700D018B2 /* ServerClient.swift */; };
 		91D365B01ACDCFE700D018B2 /* ServerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D365AB1ACDCFE700D018B2 /* ServerRequest.swift */; };
 		91D365B11ACDCFE700D018B2 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D365AC1ACDCFE700D018B2 /* ServerResponse.swift */; };
-		D3DEBF751AF167F800CEC452 /* NSCharacterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DEBF741AF167F800CEC452 /* NSCharacterSet.swift */; };
+		D3DEBF751AF167F800CEC452 /* NSCharacterSet+BladeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DEBF741AF167F800CEC452 /* NSCharacterSet+BladeKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,7 @@
 		91D365AA1ACDCFE700D018B2 /* ServerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerClient.swift; sourceTree = "<group>"; };
 		91D365AB1ACDCFE700D018B2 /* ServerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequest.swift; sourceTree = "<group>"; };
 		91D365AC1ACDCFE700D018B2 /* ServerResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
-		D3DEBF741AF167F800CEC452 /* NSCharacterSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSCharacterSet.swift; sourceTree = "<group>"; };
+		D3DEBF741AF167F800CEC452 /* NSCharacterSet+BladeKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCharacterSet+BladeKit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +101,7 @@
 				9142561E1ADDB1C200A301FB /* UIImage+BladeKit.swift */,
 				9107DCD31AE6F449003418D3 /* NSDate+BladeKit.swift */,
 				91943A831AE82C37005A1FD5 /* NSTimer+BladeKit.swift */,
-				D3DEBF741AF167F800CEC452 /* NSCharacterSet.swift */,
+				D3DEBF741AF167F800CEC452 /* NSCharacterSet+BladeKit.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 				91D365AE1ACDCFE700D018B2 /* ServerOperation.swift in Sources */,
 				91B7770A1AD6D3F900BD54BD /* UIViewController+BladeKit.swift in Sources */,
 				91D365AF1ACDCFE700D018B2 /* ServerClient.swift in Sources */,
-				D3DEBF751AF167F800CEC452 /* NSCharacterSet.swift in Sources */,
+				D3DEBF751AF167F800CEC452 /* NSCharacterSet+BladeKit.swift in Sources */,
 				91346A991AD2E0CF0045DADB /* InsetUITextField.swift in Sources */,
 				91D365B01ACDCFE700D018B2 /* ServerRequest.swift in Sources */,
 				9142561F1ADDB1C200A301FB /* UIImage+BladeKit.swift in Sources */,

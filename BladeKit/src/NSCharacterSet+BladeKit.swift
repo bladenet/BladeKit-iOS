@@ -1,5 +1,5 @@
 //
-//  NSCharacterSet.swift
+//  NSCharacterSet+BladeKit.swift
 //  BladeKit
 //
 //  Created by Brian Bates on 4/29/15.

@@ -115,6 +115,47 @@ class ExtensionsTests: XCTestCase {
         XCTAssertFalse(str.doesContainSubstring(""), "Fail")
     }
     
+    // MARK: Test String Extensions - Range replacement
+    
+    func testReplaceRange() {
+        let str = "helloworld"
+        let expected = "helOMGworld"
+        let actual = str.stringByReplacingCharactersInRange(NSMakeRange(3, 2), withString: "OMG")
+        XCTAssert(expected == actual, "Fail")
+    }
+    
+    func testReplaceNoLengthRange() {
+        let str = "helloworld"
+        let expected = "helOMGloworld"
+        let actual = str.stringByReplacingCharactersInRange(NSMakeRange(3, 0), withString: "OMG")
+        XCTAssert(expected == actual, "Fail")
+    }
+    
+    func testReplaceRangeWithSpecialCharacters() {
+        let str = "秦榯奯wow椩祚婨谢µ"
+        let expected = "秦榯奯駪wow椩OMG婨谢µ"
+        let actual = str.stringByReplacingCharactersInRange(NSMakeRange(8, 1), withString: "OMG")
+    }
+    
+    // MARK: Test String Extensions - Character containment
+    
+    func testContainsOnlyNumberCharacters() {
+        let numberStr = "8675309"
+        let invalidStr = "934奯53" // how'd that get in there?
+        XCTAssert(numberStr.containsOnlyCharactersInSet(NSCharacterSet(charactersInString: "0123456789")), "Fail")
+        XCTAssertFalse(invalidStr.containsOnlyCharactersInSet(NSCharacterSet(charactersInString: "0123456789")), "Fail")
+    }
+    
+    // MARK: Test NSCharacterSet Extensions
+    
+    func testNSCharacterSetContainsCharacter() {
+        let numberSet = NSCharacterSet(charactersInString: "0123456789")
+        XCTAssert(numberSet.containsCharacter("3"), "Fail")
+        XCTAssertFalse(numberSet.containsCharacter("b"), "Fail")
+        XCTAssertFalse(numberSet.containsCharacter("婨"), "Fail")
+    }
+    
+    
     // MARK: UIColor Extensions, Test
     func testValidCharsForOneInital() {
         let initials = "B"
