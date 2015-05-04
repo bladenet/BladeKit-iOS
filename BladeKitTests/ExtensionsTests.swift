@@ -270,4 +270,10 @@ class ExtensionsTests: XCTestCase {
         println(date.relativeTimeDisplay())
         XCTAssert(date.relativeTimeDisplay() == "2 months ago", "Fail")
     }
+    
+    // MARK: UIImage Extension
+    func testEmptyInitialsImage() {
+        let ni = UIImage.drawInitialsAsImage("", frame: CGRectMake(10.0, 10.0, 10.0, 10.0), font: UIFont.boldSystemFontOfSize(10.0))
+        XCTAssert(true, "Just making sure it doesn't crash really")
+    }
 }
