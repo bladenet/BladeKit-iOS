@@ -8,10 +8,21 @@
 
 import Foundation
 
+public enum HTTPMethod: String {
+    case Options = "OPTIONS"
+    case Get = "GET"
+    case Head = "HEAD"
+    case Post = "POST"
+    case Put = "PUT"
+    case Delete = "DELETE"
+}
+
 public class ServerRequest : BaseObject {
     
     public var headerDict = Dictionary<String,String>()
     public var url : NSURL?
+    public var httpMethod : HTTPMethod = .Get
+    public var parameters : [String:AnyObject]?
     public var parsingClosure : ((data: NSData?, error: NSError?) -> ServerResponse) = {data, error in
         let sr = ServerResponse()
         if error != nil || data == nil {
@@ -27,12 +38,36 @@ public class ServerRequest : BaseObject {
         return sr
     }
     
+    public convenience init(url : NSURL?) {
+        self.init()
+        self.url = url
+    }
+    
     public func urlRequest() -> NSMutableURLRequest {
         let req = NSMutableURLRequest()
         for (key, value) in self.headerDict {
             req.setValue(value, forHTTPHeaderField: key)
         }
         req.URL = url
+        req.HTTPMethod = self.httpMethod.rawValue
+        if let params = parameters {
+            var error: NSError?
+            switch self.httpMethod {
+            case .Post:
+                let options = NSJSONWritingOptions.allZeros
+                if let data = NSJSONSerialization.dataWithJSONObject(params, options: options, error: &error) {
+                    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    req.HTTPBody = data
+                }
+                if error != nil {
+                    var e = NSException(name:"BladeKit Exception", reason:"BLADEKIT error with serializing parameters", userInfo:nil)
+                    e.raise()
+                }
+            default:
+                var e = NSException(name:"BladeKit Exception", reason:"BLADEKIT only supports JSON and POST for raw params at the moment", userInfo:nil)
+                e.raise()
+            }
+        }
         return req
     }
 }

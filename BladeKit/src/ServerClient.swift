@@ -10,6 +10,8 @@ import Foundation
 
 public class ServerClient {
     
+    public static var urlTimeout: NSTimeInterval = 30
+    
     // MARK: Internal OperationQueue
     private let operationQueue : NSOperationQueue = {
         let opQueue = NSOperationQueue()
