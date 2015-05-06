@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ServerClient {
+public final class ServerClient {
     
     public static var urlTimeout: NSTimeInterval = 30
     

@@ -6,7 +6,7 @@ BladeKit is a friendly framework for speedier iOS development. It is written in 
 - Friendly
 - Stuff
 
-### Installation to a new project
+## Installation to a new project
 Go ahead and change directories to something relevant in your iOS project. No, this doesn't mean the root directory. This means something like /<project>/frameworks. From the command line, type the following:
 ```
 git submodule add git@github.com:bladenet/BladeKit-iOS.git
@@ -32,9 +32,61 @@ import BladeKit
 ```
 In any files in your project that reference the Kit
 
+## Server Interactions
+There are two main ways to use this piece of BladeKit. 
+- Generic
+- Subclassing
 
+You can also mix and match these two ideas. Let's take a look at the generic approach first:
+### Generic Server Interactions
+The meat of this public facing API is in `ServerClient`. And the most relevant call you will be making is:
+```
+public class func performGenericRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation)
+```
+The idea being that this performs your configurable `ServerRequest` on a separate thread (managed by NSOperationQueue), and performs the completion block with a `ServerResponse`, which notably includes an `NSError*` on it as well. The method call itself returns an NSOperation object (a subclass of, that is, but the caller doesn't need to know that) that the caller can manage if need be, or not. Notably something like `func cancel()`. 
 
-### Todo's
+Moving on, let's take a look at this `ServerRequest` object.
+```
+public class ServerRequest
+```
+For your purposes reading the 'Generic Interactions' piece of this tutorial, the most important thing to notice is that this contains a `public var url : NSURL?`. Set this and your request is good to go. For more interesting things to do with this class, scroll down to the 'Custom subclassing' section. It is highly recommended, for example, that your own project would contain a `__your_project__Request` object that manages some very consistent pieces of data that go back and forth to your server. Something, for example, like HTTPHeaders. But I digress, take a look at the custom interactions section for this. As far as setting up parameters for a JSON Post, take a look at:
+```
+public var parameters : [String:AnyObject]?
+public var httpMethod : HTTPMethod
+```
+Set that to normal Foundation objects and the method to .Post, and you are set to go. This will autoJsonSerialize those for you and put them in the postbody of the request.
+
+Next up is the `ServerResponse` object.
+```
+public class ServerResponse
+```
+Two key things here, which is that this object contains an optional `error`. In your completion block, be sure to check for that. Next is the concept of the generic results.
+```
+public func results() -> Dictionary<String,AnyObject>
+```
+The generic implementation already tries to deserialize JSON from the server and give this to you here in a dictionary. To take a look at this, simple call in your closure: 
+```
+response.results()[RESPONSE_RESULTS_KEY]
+```
+This will get you to the JSON you are looking for. That's it really.
+
+### Custom(subclassing) Server Interactions
+Good, you decided you want to make this even better for your custom application. As mentioned above, your first step will be to subclass `ServerRequest`. This will let you do more customization for things that need to happen every time you talk to your own server. Perhaps sending user credentials, for example. 
+
+You may also want to do some custom parsing, and not just get a basic `Dictionary<String,AnyObject>` back. This is handled in the `ServerRequest` as well, most notably:
+```
+public var parsingClosure : ((data: NSData?, error: NSError?) -> ServerResponse)
+```
+This closure is what is executed on your custom `ServerRequest` subclass. Go ahead and write your own if you'd like. Just be sure to handle errors and return the correct response object. Most notable if you are also subclassing the `ServerResponse` object ;)
+
+With that said, notice how in `ServerResponse` you can actually override the following function:
+```
+// remember this?
+public override func results() -> Dictionary<String,AnyObject>
+```
+Now you can do all sorts of interesting things and keep your APIClient looking consistent and clean.
+
+## Todo's
 
 - More documentation on using it!
 - What should go into it
