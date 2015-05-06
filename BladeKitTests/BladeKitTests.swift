@@ -26,7 +26,7 @@ class BladeKitTests: XCTestCase {
     func testUrlHeadersEmpty() {
         let req = ServerRequest()
         XCTAssert(req.headerDict.count == 0, "Test Failure")
-        XCTAssert(req.urlRequest().allHTTPHeaderFields == nil, "Test Failure")
+        XCTAssert(req.urlRequest().allHTTPHeaderFields?.count == 0, "Test Failure")
     }
     
     func testUrlHeaderPopulation() {
