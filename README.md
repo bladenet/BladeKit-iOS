@@ -54,7 +54,13 @@ For your purposes reading the 'Generic Interactions' piece of this tutorial, the
 public var parameters : [String:AnyObject]?
 public var httpMethod : HTTPMethod
 ```
-Set that to normal Foundation objects and the method to .Post, and you are set to go. This will autoJsonSerialize those for you and put them in the postbody of the request.
+Set that to normal Foundation objects and the method to .Post, and you are set to go. This will autoJsonSerialize those for you and put them in the postbody of the request. As viewed in the NSJSONSerialization Class Docs:
+
+> An object that may be converted to JSON must have the following properties:
+> - The top level object is an NSArray or NSDictionary.
+> - All objects are instances of NSString, NSNumber, NSArray, NSDictionary, or NSNull.
+> - All dictionary keys are instances of NSString.
+> - Numbers are not NaN or infinity.
 
 Next up is the `ServerResponse` object.
 ```

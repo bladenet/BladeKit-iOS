@@ -104,4 +104,26 @@ class BladeKitTests: XCTestCase {
             }
         })
     }
+    
+    func testRequestSerializationEmpty() {
+        let request = ServerRequest(url: NSURL(string: "http://www.example.com"))
+        let urlReq = request.urlRequest()
+        XCTAssert(urlReq.HTTPBody == nil, "Fail")
+    }
+    
+    func testRequestSerializationBasic() {
+        let request = ServerRequest(url: NSURL(string: "http://www.example.com"))
+        request.parameters = ["Key":"Value"]
+        request.httpMethod = .Post
+        let urlReq = request.urlRequest()
+        XCTAssert(urlReq.HTTPBody != nil, "Fail")
+    }
+    
+    func testRequestSerializationOtherFoundationObjects() {
+        let request = ServerRequest(url: NSURL(string: "http://www.example.com"))
+        request.parameters = ["Key":NSNull.new(),"Key2":4.0,"Key3":["String"]]
+        request.httpMethod = .Post
+        let urlReq = request.urlRequest()
+        XCTAssert(urlReq.HTTPBody != nil, "Fail")
+    }
 }
