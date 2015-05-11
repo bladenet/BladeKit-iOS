@@ -7,7 +7,7 @@ BladeKit is a friendly framework for speedier iOS development. It is written in 
 - Stuff
 
 ## Installation to a new project
-Go ahead and change directories to something relevant in your iOS project. No, this doesn't mean the root directory. This means something like /<project>/frameworks. From the command line, type the following:
+Go ahead and change directories to something relevant in your iOS project. No, this doesn't mean the root directory. This means something like `<project>/frameworks`. From the command line, type the following:
 ```
 git submodule add git@github.com:bladenet/BladeKit-iOS.git
 ```
@@ -68,13 +68,13 @@ public class ServerResponse
 ```
 Two key things here, which is that this object contains an optional `error`. In your completion block, be sure to check for that. Next is the concept of the generic results.
 ```
-public func results() -> Dictionary<String,AnyObject>
+public func results() -> AnyObject
 ```
 The generic implementation already tries to deserialize JSON from the server and give this to you here in a dictionary. To take a look at this, simple call in your closure: 
 ```
-response.results()[RESPONSE_RESULTS_KEY]
+response.results()
 ```
-This will get you to the JSON you are looking for. That's it really.
+This will get you to the JSON you are looking for. That's it really. You may want to do some checking here, using a `let ... as? __something__`, but that's up to you.
 
 ### Custom(subclassing) Server Interactions
 Good, you decided you want to make this even better for your custom application. As mentioned above, your first step will be to subclass `ServerRequest`. This will let you do more customization for things that need to happen every time you talk to your own server. Perhaps sending user credentials, for example. 

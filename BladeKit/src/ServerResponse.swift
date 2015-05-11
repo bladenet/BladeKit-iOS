@@ -11,9 +11,9 @@ import Foundation
 public class ServerResponse : BaseObject {
     public var error : NSError?
     public var rawResponse : NSHTTPURLResponse?
-    public var genericResults: [String:AnyObject] = [:]
+    public var genericResults: AnyObject = [:]
     
-    public func results() -> Dictionary<String,AnyObject> {
+    public func results() -> AnyObject {
         return self.genericResults
     }
 }

@@ -17,9 +17,6 @@ public enum HTTPMethod: String {
     case Delete = "DELETE"
 }
 
-// Use this to acquire the base results if you are not subclassing
-public let RESPONSE_RESULTS_KEY: String = "generic_results"
-
 public class ServerRequest : BaseObject {
     
     public var headerDict = Dictionary<String,String>()
@@ -34,7 +31,7 @@ public class ServerRequest : BaseObject {
             if let rd = data {
                 // default to JSON Serialization
                 if let parsed: AnyObject = NSJSONSerialization.JSONObjectWithData(rd, options: NSJSONReadingOptions.MutableContainers, error: nil) {
-                    sr.genericResults = [RESPONSE_RESULTS_KEY:parsed]
+                    sr.genericResults = parsed
                 }
             }
         }
