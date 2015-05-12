@@ -276,4 +276,17 @@ class ExtensionsTests: XCTestCase {
         let ni = UIImage.drawInitialsAsImage("", frame: CGRectMake(10.0, 10.0, 10.0, 10.0), font: UIFont.boldSystemFontOfSize(10.0))
         XCTAssert(true, "Just making sure it doesn't crash really")
     }
+    
+    // MARK: NSError Extension
+    func testErrorLocalizedDescription() {
+        let desc = "Bad Error"
+        let e = NSError.errorWithDomain("test", code: 420, localizedDescription:desc)
+        XCTAssert(e.localizedDescription == desc, "Expected Description")
+    }
+    
+    func testErrorDescription() {
+        let desc = "Bad Error"
+        let e = NSError.errorWithDomain("test", code: 420, localizedDescription:desc)
+        XCTAssertNotNil(e.description, "Fail")
+    }
 }
