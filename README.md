@@ -13,8 +13,8 @@ Go ahead and change directories to something relevant in your iOS project. No, t
 ```
 git submodule add git@github.com:bladenet/BladeKit-iOS.git
 ```
+##### Upkeep
 Reminder these means that when you clone originally, you must include the recursive option, but I'm sure you knew that already.
-
 ```
 git clone --recursive
 ```
@@ -22,6 +22,11 @@ And of course to update the submodule, the basic
 ```
 git submodule foreach git pull
 ```
+For what it's worth, you will probably also want a nice alias to help with the matter of submodules.
+```
+git config --global alias.pr '!git pull --rebase; git submodule init; git submodule update;'
+```
+
 #### Step two, dragging the folder and adding the build dependency
 After this, go ahead and drag the `BladeKit-iOS.xcodeproj` (*not the folder*) into the finder in your active Xcode project. Be sure to copy files as needed.
 
