@@ -1,10 +1,11 @@
 # BladeKit
 
-BladeKit is a friendly framework for speedier iOS development. It is written in Swift. Mostly.
+BladeKit is a friendly framework for speedier iOS development. It is written in Swift. It is intended to be lightweight, customizable, and have useful stuff for which building more stuff is easier.
 
 - Easy to import
 - Friendly
-- Stuff
+- Useful Subscripting and Extensions
+- Server interactions
 
 ## Installation to a new project
 Go ahead and change directories to something relevant in your iOS project. No, this doesn't mean the root directory. This means something like `<project>/frameworks`. From the command line, type the following:
@@ -79,7 +80,7 @@ This will get you to the JSON you are looking for. That's it really. You may wan
 ### Custom(subclassing) Server Interactions
 Good, you decided you want to make this even better for your custom application. As mentioned above, your first step will be to subclass `ServerRequest`. This will let you do more customization for things that need to happen every time you talk to your own server. Perhaps sending user credentials, for example. 
 
-You may also want to do some custom parsing, and not just get a basic `Dictionary<String,AnyObject>` back. This is handled in the `ServerRequest` as well, most notably:
+You may also want to do some custom parsing, and not just get a basic `AnyObject` back. This is handled in the `ServerRequest` as well, most notably:
 ```
 public var parsingClosure : ((data: NSData?, error: NSError?) -> ServerResponse)
 ```
@@ -88,14 +89,14 @@ This closure is what is executed on your custom `ServerRequest` subclass. Go ahe
 With that said, notice how in `ServerResponse` you can actually override the following function:
 ```
 // remember this?
-public override func results() -> Dictionary<String,AnyObject>
+public override func results() -> AnyObject
 ```
 Now you can do all sorts of interesting things and keep your APIClient looking consistent and clean.
 
 ## Todo's
 
-- More documentation on using it!
-- What should go into it
+- More documentation, likely some examples
+- What more cool stuff should go into it
 - Other stuff?
 
 
