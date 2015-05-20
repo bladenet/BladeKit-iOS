@@ -146,6 +146,35 @@ class ExtensionsTests: XCTestCase {
         XCTAssertFalse(invalidStr.containsOnlyCharactersInSet(NSCharacterSet(charactersInString: "0123456789")), "Fail")
     }
     
+    // MARK: Test String URL Regex
+    func testSimpleRegexMatch() {
+        let match = "http://www.example.com".rangeOfFirstStringMatchingUrlRegex()
+        XCTAssert(match != nil, "Fail")
+        XCTAssert(distance(match!.startIndex, match!.endIndex) == 22, "Fail")
+    }
+    
+    func testSimpleRegexMatch2() {
+        let match = "http://www.example.com/Job_1#3".rangeOfFirstStringMatchingUrlRegex()
+        XCTAssert(match != nil, "Fail")
+        XCTAssert(distance(match!.startIndex, match!.endIndex) == 30, "Fail")
+    }
+    
+    func testSimpleRegexMatch3() {
+        let match = "https://example.com/Job_1#3".rangeOfFirstStringMatchingUrlRegex()
+        XCTAssert(match != nil, "Fail")
+        XCTAssert(distance(match!.startIndex, match!.endIndex) == 27, "Fail")
+    }
+    
+    func testSimpleRegexNonMatch() {
+        let match = "httpx:///".rangeOfFirstStringMatchingUrlRegex()
+        XCTAssert(match == nil, "Fail")
+    }
+    
+    func testSimpleRegexNonMatch2() {
+        let match = "http:/example.com".rangeOfFirstStringMatchingUrlRegex()
+        XCTAssert(match == nil, "Fail")
+    }
+    
     // MARK: Test NSCharacterSet Extensions
     
     func testNSCharacterSetContainsCharacter() {

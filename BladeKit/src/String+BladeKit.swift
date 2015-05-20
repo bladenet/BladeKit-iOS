@@ -91,6 +91,17 @@ public extension String {
         return true
     }
     
+    public func rangeOfFirstStringMatchingUrlRegex() -> Range<String.Index>? {
+        // https://mathiasbynens.be/demo/url-regex
+        // using @imme-emosol for simplicity, removing the beginning and ending mod
+        let urlRegex = "(https?|ftp)://(-\\.)?([^\\s/?\\.#-]+\\.?)+(/[^\\s]*)?"
+        return self.rangeOfStringMatchingRegex(urlRegex)
+    }
+    
+    public func rangeOfStringMatchingRegex(regex: String) -> Range<String.Index>? {
+        return self.rangeOfString(regex, options: (.RegularExpressionSearch | .CaseInsensitiveSearch))
+    }
+    
     // Convert an NSRange to a Range<String.index>
     static func stringRangeToRange(text: String, range: NSRange) -> Range<String.Index> {
         let start = advance(text.startIndex, range.location)
