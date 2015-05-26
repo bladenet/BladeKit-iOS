@@ -21,7 +21,6 @@ public class ServerOperation : NSOperation {
     
     public override func main() {
         let urlReq = self.request.urlRequest()
-        urlReq.timeoutInterval = ServerClient.urlTimeout
         var err: NSError?
         var response: NSURLResponse?
         let data = NSURLConnection.sendSynchronousRequest(urlReq, returningResponse: &response, error: &err)

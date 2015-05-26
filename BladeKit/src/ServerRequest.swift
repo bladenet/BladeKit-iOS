@@ -22,6 +22,8 @@ public class ServerRequest : BaseObject {
     public var headerDict = Dictionary<String,String>()
     public var url : NSURL?
     public var httpMethod : HTTPMethod = .Get
+    public var timeoutOverride = ServerClient.urlTimeout
+
     public var parameters : [String:AnyObject]?
     public var parsingClosure : ((data: NSData?, error: NSError?) -> ServerResponse) = {data, error in
         let sr = ServerResponse()
@@ -45,6 +47,7 @@ public class ServerRequest : BaseObject {
     
     public func urlRequest() -> NSMutableURLRequest {
         let req = NSMutableURLRequest()
+        req.timeoutInterval = timeoutOverride
         for (key, value) in self.headerDict {
             req.setValue(value, forHTTPHeaderField: key)
         }
