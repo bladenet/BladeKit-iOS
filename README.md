@@ -114,7 +114,7 @@ ServerClient.performGenericRequest(request, completion: { (response) -> Void in
     }
 })
 ```
-## Basic Example 2 (Some paramaters)
+## Basic Example 2 (Some parameters)
 ```
 // Sample server call with parameters
 let url = NSURL(string: "http://example.com")
