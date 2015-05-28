@@ -19,7 +19,7 @@ public class ServerOperation : NSOperation {
         super.init()
     }
     
-    public override func main() {
+    override public func main() {
         let urlReq = self.request.urlRequest()
         var err: NSError?
         var response: NSURLResponse?

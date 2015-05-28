@@ -31,9 +31,15 @@ public class VersionUtils {
         return getVersionAtIndex(versionString, index: 2)
     }
     
-    // Comparator for version strings.
-    // Returns -1 if v1 < 2, 0 if v1 == v2 and 1 if v1 > v2
-    public class func compareVersions(v1: String, v2: String) -> Int {
+    /**
+    Comparator for version strings.
+    
+    :param: String1 The first string version to compare.
+    :param: String2 The second string version to compare.
+    
+    :returns: -1 if v1 < 2, 0 if v1 == v2 and 1 if v1 > v2
+    */
+    public class func compareVersions(v1: String, _ v2: String) -> Int {
         if majorVersion(v1) != majorVersion(v2) {
             return majorVersion(v1) - majorVersion(v2)
         } else if minorVersion(v1) != minorVersion(v2) {

@@ -22,7 +22,16 @@ public final class ServerClient {
     // MARK: - Singleton
     private static let sharedInstance = ServerClient()
     
-    // MARK: - Generic Request
+    // MARK: - Generic Requests
+    
+    /**
+    The main networking call, which will run asynchronously on a NSOperationQueue.
+    
+    :param: ServerRequest The configured object with a variety of interesting information for your networking call.
+    :param: ServerResponse After the networking call is completed, this will be called on the main thread.
+
+    :returns: NSOperation
+    */
     public class func performGenericRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation {
         let op = ServerOperation(request: request)
         let weakOp = op
@@ -37,6 +46,15 @@ public final class ServerClient {
         return op
     }
     
+    /**
+    The a repeating networking call, which will repeat itself asynchronously on a NSOperationQueue based on the timeInterval.
+    
+    :param: ServerRequest The configured object with a variety of interesting information for your networking call.
+    :param: NSTimeInterval The repeat interval for the request.
+    :param: ServerResponse After the networking call is completed, this will be called on the main thread.
+    
+    :returns: NSTimer
+    */
     public class func performGenericRepeatingRequest(request: ServerRequest, timeInterval:NSTimeInterval, completion:(response: ServerResponse) -> Void) -> NSTimer {
         let fireDate = timeInterval + CFAbsoluteTimeGetCurrent()
         let timer = NSTimer.schedule(repeatInterval: timeInterval, handler:{ nTimer in
