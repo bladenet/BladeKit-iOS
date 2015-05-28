@@ -101,10 +101,37 @@ public override func results() -> AnyObject
 ```
 Now you can do all sorts of interesting things and keep your APIClient looking consistent and clean.
 
+## Basic Example 1
+```
+// Sample server call
+let url = NSURL(string: "http://example.com")
+let request = ServerRequest(url: url)
+ServerClient.performGenericRequest(request, completion: { (response) -> Void in
+    if let err = response.error {
+        // handle error
+    } else { 
+        // something interesting with response.results()
+    }
+})
+```
+## Basic Example 2 (Some paramaters)
+```
+// Sample server call with parameters
+let url = NSURL(string: "http://example.com")
+let request = ServerRequest(url: url)
+request.httpMethod = .Post
+request.parameters = ["colour":"orange"]
+ServerClient.performGenericRequest(request, completion: { (response) -> Void in
+    if let err = response.error {
+        // handle error
+    } else { 
+        // something interesting with response.results()
+    }
+})
+```
 ## Todo's
 
 - More documentation, likely some examples
 - What more cool stuff should go into it
 - Other stuff?
-
 
