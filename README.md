@@ -50,7 +50,7 @@ You can also mix and match these two ideas. Let's take a look at the generic app
 ### Generic Server Interactions
 The meat of this public facing API is in `ServerClient`. And the most relevant call you will be making is:
 ```
-public class func performRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation)
+public class func performRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation
 ```
 The idea being that this performs your configurable `ServerRequest` on a separate thread (managed by NSOperationQueue), and performs the completion block with a `ServerResponse`, which notably includes an `NSError*` on it as well. The method call itself returns an NSOperation object (a subclass of, that is, but the caller doesn't need to know that) that the caller can manage if need be, or not. Notably something like `func cancel()`. 
 
