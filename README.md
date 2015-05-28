@@ -50,7 +50,7 @@ You can also mix and match these two ideas. Let's take a look at the generic app
 ### Generic Server Interactions
 The meat of this public facing API is in `ServerClient`. And the most relevant call you will be making is:
 ```
-public class func performGenericRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation)
+public class func performRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation)
 ```
 The idea being that this performs your configurable `ServerRequest` on a separate thread (managed by NSOperationQueue), and performs the completion block with a `ServerResponse`, which notably includes an `NSError*` on it as well. The method call itself returns an NSOperation object (a subclass of, that is, but the caller doesn't need to know that) that the caller can manage if need be, or not. Notably something like `func cancel()`. 
 
@@ -106,7 +106,7 @@ Now you can do all sorts of interesting things and keep your APIClient looking c
 // Sample server call
 let url = NSURL(string: "http://example.com")
 let request = ServerRequest(url: url)
-ServerClient.performGenericRequest(request, completion: { (response) -> Void in
+ServerClient.performRequest(request, completion: { (response) -> Void in
     if let err = response.error {
         // handle error
     } else { 
@@ -121,7 +121,7 @@ let url = NSURL(string: "http://example.com")
 let request = ServerRequest(url: url)
 request.httpMethod = .Post
 request.parameters = ["colour":"orange"]
-ServerClient.performGenericRequest(request, completion: { (response) -> Void in
+ServerClient.performRequest(request, completion: { (response) -> Void in
     if let err = response.error {
         // handle error
     } else { 
@@ -130,7 +130,7 @@ ServerClient.performGenericRequest(request, completion: { (response) -> Void in
 })
 ```
 
-Reminder, the `performGenericRequest(...)` call does indeed return an NSOperation. You can feel free to keep track of that, or just disregard it.
+Reminder, the `performRequest(...)` call does indeed return an NSOperation. You can feel free to keep track of that, or just disregard it.
 
 ## Discussion
 What advantage does this kit have over, say, Alamofire or even just the generic calls in NSURLConnection? 

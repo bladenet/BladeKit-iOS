@@ -22,8 +22,7 @@ public final class ServerClient {
     // MARK: - Singleton
     private static let sharedInstance = ServerClient()
     
-    // MARK: - Generic Requests
-    
+    // MARK: - Making Requests
     /**
     The main networking call, which will run asynchronously on a NSOperationQueue.
     
@@ -32,7 +31,7 @@ public final class ServerClient {
 
     :returns: NSOperation
     */
-    public class func performGenericRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation {
+    public class func performRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation {
         let op = ServerOperation(request: request)
         let weakOp = op
         op.completionBlock = { [unowned op] in
@@ -55,11 +54,11 @@ public final class ServerClient {
     
     :returns: NSTimer
     */
-    public class func performGenericRepeatingRequest(request: ServerRequest, timeInterval:NSTimeInterval, completion:(response: ServerResponse) -> Void) -> NSTimer {
+    public class func performRepeatingRequest(request: ServerRequest, timeInterval:NSTimeInterval, completion:(response: ServerResponse) -> Void) -> NSTimer {
         let fireDate = timeInterval + CFAbsoluteTimeGetCurrent()
         let timer = NSTimer.schedule(repeatInterval: timeInterval, handler:{ nTimer in
             if nTimer.valid {
-                ServerClient.performGenericRequest(request, completion:completion)
+                ServerClient.performRequest(request, completion:completion)
             }
         })
         return timer

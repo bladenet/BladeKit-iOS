@@ -50,13 +50,13 @@ class UtilitiesTests: XCTestCase {
     }
     
     func testCompareVersions() {
-        XCTAssert(VersionUtils.compareVersions("1.0.0", v2: "1.0.1") < 0, "Compare versions fail")
-        XCTAssert(VersionUtils.compareVersions("1.0.1", v2: "1.0.0") > 0, "Compare versions fail")
-        XCTAssert(VersionUtils.compareVersions("1.2.3", v2: "1.2.3") == 0, "Compare versions fail")
-        XCTAssert(VersionUtils.compareVersions("2.0.0", v2: "1.3.12") > 0, "Compare versions fail")
-        XCTAssert(VersionUtils.compareVersions("1.12.0", v2: "1.13.3") < 0, "Compare versions fail")
-        XCTAssert(VersionUtils.compareVersions("", v2: "1") < 0, "Compare versions fail")
-        XCTAssert(VersionUtils.compareVersions("1", v2: "1.0.0") == 0, "Compare versions fail")
-        XCTAssert(VersionUtils.compareVersions("1", v2: "1.0.1") < 0, "Compare versions fail")
+        XCTAssert(VersionUtils.compareVersions("1.0.0", "1.0.1") < 0, "Compare versions fail")
+        XCTAssert(VersionUtils.compareVersions("1.0.1", "1.0.0") > 0, "Compare versions fail")
+        XCTAssert(VersionUtils.compareVersions("1.2.3", "1.2.3") == 0, "Compare versions fail")
+        XCTAssert(VersionUtils.compareVersions("2.0.0", "1.3.12") > 0, "Compare versions fail")
+        XCTAssert(VersionUtils.compareVersions("1.12.0", "1.13.3") < 0, "Compare versions fail")
+        XCTAssert(VersionUtils.compareVersions("", "1") < 0, "Compare versions fail")
+        XCTAssert(VersionUtils.compareVersions("1", "1.0.0") == 0, "Compare versions fail")
+        XCTAssert(VersionUtils.compareVersions("1", "1.0.1") < 0, "Compare versions fail")
     }
 }

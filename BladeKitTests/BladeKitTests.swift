@@ -69,7 +69,7 @@ class BladeKitTests: XCTestCase {
         req.parsingClosure = { data in
             return ServerResponse()
         }
-        ServerClient.performGenericRequest(req){ (response) -> Void in
+        ServerClient.performRequest(req){ (response) -> Void in
             XCTAssert(response.rawResponse?.statusCode == 200, "Fail")
             asyncExpectation.fulfill()
         }
@@ -89,7 +89,7 @@ class BladeKitTests: XCTestCase {
         req.parsingClosure = { data in
             return ServerResponse()
         }
-        let timer = ServerClient.performGenericRepeatingRequest(req, timeInterval:0.2){ (response) -> Void in
+        let timer = ServerClient.performRepeatingRequest(req, timeInterval:0.2){ (response) -> Void in
             XCTAssert(response.rawResponse?.statusCode == 200, "Fail")
             count++
             println(count)
