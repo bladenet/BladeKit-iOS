@@ -114,7 +114,7 @@ ServerClient.performGenericRequest(request, completion: { (response) -> Void in
     }
 })
 ```
-## Basic Example 2 (Some parameters)
+## Basic Example 2 (Some paramaters)
 ```
 // Sample server call with parameters
 let url = NSURL(string: "http://example.com")
@@ -129,9 +129,20 @@ ServerClient.performGenericRequest(request, completion: { (response) -> Void in
     }
 })
 ```
+
+Reminder, the `performGenericRequest(...)` call does indeed return an NSOperation. You can feel free to keep track of that, or just disregard it.
+
+## Discussion
+What advantage does this kit have over, say, Alamofire or even just the generic calls in NSURLConnection? 
+
+Well, behind the scenes this handles the networking requests a bit differently then Alamofire, for example, and is a thin layer using NSOperation and NSOperationQueue on top of the basic NSURLConnection handling in Foundation. So customizing and subclassing should, based on this author's interpretation, be easier and more intuitive. If you take a look at the examples above, I hope your mind immediately leaps out with a conclusion like 'oh I really want to subclass `ServerRequest` to remove some of that boilerplate, since obviously I'll be hitting similar URLs that are not example.com' And then you have then understood the point of the framework, which giving the quick customizablility at an obvious override point. Similarly, in contradiction to Alamofire, there is no need to create a `Manager` object. You can configure something like Timeout directly on each requests, OR you can set a global timeout for all requests that aren't otherwise set with the simple: `ServerClient.urlTimeout = TIMEOUT_INTERVAL_FOR_REQUEST`.
+
+Does this framework attempt to replace Alamofire?
+
+No, Alamofire has a ton of other server interaction functionality and cool stuff. If you have read and identified some of those features that you really want in Alamofire, use that. Or, I imagine it may be a fairly small change to include some additional features in BladeKit, and you can submit a pull request if you'd like. But as it stands, the kit is a lot less bulky and full-featured by design. And of course, BladeKit also includes other helpful materials as well, such as subscripting and string manipulation code that you may find useful, and eventually more customizable UI code as well.
+
 ## Todo's
 
-- More documentation, likely some examples
 - What more cool stuff should go into it
 - Other stuff?
 
