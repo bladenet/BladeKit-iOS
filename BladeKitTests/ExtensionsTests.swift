@@ -137,6 +137,13 @@ class ExtensionsTests: XCTestCase {
         let actual = str.stringByReplacingCharactersInRange(NSMakeRange(8, 1), withString: "OMG")
     }
     
+    func testReplacementInterestingCharacterSetRange() {
+        let str = "😉"
+        let expected = "😉"
+        let actual = str.stringByReplacingCharactersInRange(NSMakeRange(2, 0), withString: "OMG")
+        XCTAssert(actual == "😉OMG", "Fail")
+    }
+    
     // MARK: Test String Extensions - Character containment
     
     func testContainsOnlyNumberCharacters() {

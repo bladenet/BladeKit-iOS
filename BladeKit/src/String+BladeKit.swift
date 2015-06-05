@@ -103,16 +103,23 @@ public extension String {
     }
     
     // Convert an NSRange to a Range<String.index>
-    static func stringRangeToRange(text: String, range: NSRange) -> Range<String.Index> {
-        let start = advance(text.startIndex, range.location)
-        let end = advance(start, range.length)
-        let swiftRange = Range<String.Index>(start: start, end: end)
-        return swiftRange
+    private static func stringRangeToRange(text: String, range: NSRange) -> Range<String.Index>? {
+        let utf16start = text.utf16.startIndex
+        if let from = String.Index(text.utf16.startIndex + range.location, within: text),
+            let to = String.Index(text.utf16.startIndex + range.location + range.length, within: text) {
+                return from ..< to
+        }
+        return nil
     }
     
     // Replace characters in range using NSRange (useful when using the UITextField delegate)
     func stringByReplacingCharactersInRange(range: NSRange, withString replacement: String) -> String {
-        return stringByReplacingCharactersInRange(String.stringRangeToRange(self, range: range), withString: replacement)
+        if let srange = String.stringRangeToRange(self, range: range) {
+            return stringByReplacingCharactersInRange(srange, withString: replacement)
+        } else {
+            // range is un-usable in swift due to character encoding differences
+            return self
+        }
     }
     
 }
