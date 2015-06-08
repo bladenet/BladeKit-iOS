@@ -33,8 +33,12 @@ public class DesignableView: UIView {
         // Assumes UIView is top level and only object in .xib file
         view = xib.instantiateWithOwner(self, options: nil)[0] as! UIView
         
-        // use bounds not frame or it'll be offset
-        view.frame = bounds
+        // confirm desired bounds based on if it was loaded from nib or code
+        if CGRectIsEmpty(bounds) {
+            frame = view.bounds
+        } else {
+            view.frame = bounds
+        }
         
         // Make the view stretch with containing view
         view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
