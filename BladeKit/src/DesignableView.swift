@@ -55,9 +55,10 @@ public class DesignableView: UIView {
         addSubview(view)
     }
     
-    // This must be overridden in subclass
+    // May must be overridden in subclass
     public func xibName() -> String {
-        fatalError("xibName() has not been implemented")
+        // default implementation
+        return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
     }
     
     // Override if you need a hook for additional setup after .xib is loaded
