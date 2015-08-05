@@ -15,7 +15,7 @@ public final class ServerClient {
     // MARK: Internal OperationQueue
     private let operationQueue : NSOperationQueue = {
         let opQueue = NSOperationQueue()
-        opQueue.maxConcurrentOperationCount = 3
+        opQueue.maxConcurrentOperationCount = 5
         return opQueue
     }()
     
@@ -26,14 +26,14 @@ public final class ServerClient {
     /**
     The main networking call, which will run asynchronously on a NSOperationQueue.
     
-    :param: ServerRequest The configured object with a variety of interesting information for your networking call.
-    :param: ServerResponse After the networking call is completed, this will be called on the main thread.
+    :param: request The configured ServerRequest object with a variety of interesting information for your networking call.
+    :param: delayedStart Should the ServerClient start the request immediately. Useful for operation dependencies or otherwise configuring starting the requests at a different time.
+    :param: completion A completion block containing the ServerResponse after the networking call is completed, this will be called on the main thread.
 
     :returns: NSOperation
     */
-    public class func performRequest(request: ServerRequest, completion:(response: ServerResponse) -> Void) -> NSOperation {
+    public class func performRequest(request: ServerRequest, delayedStart: Bool = false, completion:(response: ServerResponse) -> Void) -> NSOperation {
         let op = ServerOperation(request: request)
-        let weakOp = op
         op.completionBlock = { [unowned op] in
             if op.cancelled == false {
                 dispatch_sync(dispatch_get_main_queue(), { () -> Void in
@@ -41,7 +41,9 @@ public final class ServerClient {
                 })
             }
         }
-        ServerClient.enQueueOperation(op)
+        if !delayedStart {
+            ServerClient.enQueueOperation(op)
+        }
         return op
     }
     
@@ -62,6 +64,17 @@ public final class ServerClient {
             }
         })
         return timer
+    }
+    
+    /**
+    If one or more requests have been created with the delayedStart flag set, this is how to start them
+    
+    :param: operations The operations to begin executing.
+    */
+    public class func beginOperations(operations: [NSOperation]) {
+        for op in operations {
+            ServerClient.enQueueOperation(op)
+        }
     }
     
     // MARK: NSOperationQueue convenience
