@@ -27,7 +27,7 @@ public final class ServerClient {
     The main networking call, which will run asynchronously on a NSOperationQueue.
     
     :param: request The configured ServerRequest object with a variety of interesting information for your networking call.
-    :param: delayedStart Should the ServerClient start the request immediately. Useful for operation dependencies or otherwise configuring starting the requests at a different time.
+    :param: delayedStart Should the ServerClient start the request immediately. Useful for operation dependencies or otherwise configuring starting the requests at a different time. Default is `false`, (ie, begin immediately)
     :param: completion A completion block containing the ServerResponse after the networking call is completed, this will be called on the main thread.
 
     :returns: NSOperation
