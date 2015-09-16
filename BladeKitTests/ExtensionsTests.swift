@@ -133,8 +133,8 @@ class ExtensionsTests: XCTestCase {
     
     func testReplaceRangeWithSpecialCharacters() {
         let str = "秦榯奯wow椩祚婨谢µ"
-        let expected = "秦榯奯駪wow椩OMG婨谢µ"
-        let actual = str.stringByReplacingCharactersInRange(NSMakeRange(8, 1), withString: "OMG")
+        let expected = "秦榯奯wow椩祚OMG婨谢µ"
+        let actual = str.stringByReplacingCharactersInRange(NSMakeRange(8, 0), withString: "OMG")
         XCTAssert(actual == expected, "Fail")
     }
     
