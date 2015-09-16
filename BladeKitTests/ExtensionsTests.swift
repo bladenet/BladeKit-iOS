@@ -135,13 +135,14 @@ class ExtensionsTests: XCTestCase {
         let str = "秦榯奯wow椩祚婨谢µ"
         let expected = "秦榯奯駪wow椩OMG婨谢µ"
         let actual = str.stringByReplacingCharactersInRange(NSMakeRange(8, 1), withString: "OMG")
+        XCTAssert(actual == expected, "Fail")
     }
     
     func testReplacementInterestingCharacterSetRange() {
         let str = "😉"
-        let expected = "😉"
+        let expected = "😉OMG"
         let actual = str.stringByReplacingCharactersInRange(NSMakeRange(2, 0), withString: "OMG")
-        XCTAssert(actual == "😉OMG", "Fail")
+        XCTAssert(actual == expected, "Fail")
     }
     
     // MARK: Test String Extensions - Character containment
@@ -310,7 +311,7 @@ class ExtensionsTests: XCTestCase {
     // MARK: UIImage Extension
     func testEmptyInitialsImage() {
         let ni = UIImage.drawInitialsAsImage("", frame: CGRectMake(10.0, 10.0, 10.0, 10.0), font: UIFont.boldSystemFontOfSize(10.0))
-        XCTAssert(true, "Just making sure it doesn't crash really")
+        XCTAssert(ni.size.width == 10, "Just making sure it doesn't crash really")
     }
     
     // MARK: NSError Extension
