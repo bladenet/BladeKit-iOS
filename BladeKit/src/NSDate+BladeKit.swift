@@ -20,7 +20,7 @@ public extension NSDate {
     /**
     Calculate a rough approximate relative time and get a display string.
     
-    :returns: String A formatted display string, such as *just now* or *12 seconds ago*.
+    - returns: String A formatted display string, such as *just now* or *12 seconds ago*.
     */
     public func relativeTimeDisplay() -> String {
         let time = self.timeIntervalSince1970

@@ -32,7 +32,7 @@ public class ServerRequest : BaseObject {
         } else {
             if let rd = data {
                 // default to JSON Serialization
-                if let parsed: AnyObject = NSJSONSerialization.JSONObjectWithData(rd, options: NSJSONReadingOptions.MutableContainers, error: nil) {
+                if let parsed: AnyObject = try? NSJSONSerialization.JSONObjectWithData(rd, options: NSJSONReadingOptions.MutableContainers) {
                     sr.genericResults = parsed
                 }
             }
@@ -57,17 +57,20 @@ public class ServerRequest : BaseObject {
             var error: NSError?
             switch self.httpMethod {
             case .Post:
-                let options = NSJSONWritingOptions.allZeros
-                if let data = NSJSONSerialization.dataWithJSONObject(params, options: options, error: &error) {
+                let options = NSJSONWritingOptions()
+                do {
+                    let data = try NSJSONSerialization.dataWithJSONObject(params, options: options)
                     req.setValue("application/json", forHTTPHeaderField: "Content-Type")
                     req.HTTPBody = data
+                } catch let error1 as NSError {
+                    error = error1
                 }
                 if error != nil {
-                    var e = NSException(name:"BladeKit Exception", reason:"BLADEKIT error with serializing parameters", userInfo:nil)
+                    let e = NSException(name:"BladeKit Exception", reason:"BLADEKIT error with serializing parameters", userInfo:nil)
                     e.raise()
                 }
             default:
-                var e = NSException(name:"BladeKit Exception", reason:"BLADEKIT only supports JSON and POST for raw params at the moment", userInfo:nil)
+                let e = NSException(name:"BladeKit Exception", reason:"BLADEKIT only supports JSON and POST for raw params at the moment", userInfo:nil)
                 e.raise()
             }
         }

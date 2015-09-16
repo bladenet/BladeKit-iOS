@@ -26,11 +26,11 @@ public final class ServerClient {
     /**
     The main networking call, which will run asynchronously on a NSOperationQueue.
     
-    :param: request The configured ServerRequest object with a variety of interesting information for your networking call.
-    :param: delayedStart Should the ServerClient start the request immediately. Useful for operation dependencies or otherwise configuring starting the requests at a different time. Default is `false`, (ie, begin immediately)
-    :param: completion A completion block containing the ServerResponse after the networking call is completed, this will be called on the main thread.
+    - parameter request: The configured ServerRequest object with a variety of interesting information for your networking call.
+    - parameter delayedStart: Should the ServerClient start the request immediately. Useful for operation dependencies or otherwise configuring starting the requests at a different time. Default is `false`, (ie, begin immediately)
+    - parameter completion: A completion block containing the ServerResponse after the networking call is completed, this will be called on the main thread.
 
-    :returns: NSOperation
+    - returns: NSOperation
     */
     public class func performRequest(request: ServerRequest, delayedStart: Bool = false, completion:(response: ServerResponse) -> Void) -> NSOperation {
         let op = ServerOperation(request: request)
@@ -50,11 +50,11 @@ public final class ServerClient {
     /**
     The a repeating networking call, which will repeat itself asynchronously on a NSOperationQueue based on the timeInterval.
     
-    :param: ServerRequest The configured object with a variety of interesting information for your networking call.
-    :param: NSTimeInterval The repeat interval for the request.
-    :param: ServerResponse After the networking call is completed, this will be called on the main thread.
+    - parameter ServerRequest: The configured object with a variety of interesting information for your networking call.
+    - parameter NSTimeInterval: The repeat interval for the request.
+    - parameter ServerResponse: After the networking call is completed, this will be called on the main thread.
     
-    :returns: NSTimer
+    - returns: NSTimer
     */
     public class func performRepeatingRequest(request: ServerRequest, timeInterval:NSTimeInterval, completion:(response: ServerResponse) -> Void) -> NSTimer {
         let timer = NSTimer.schedule(repeatInterval: timeInterval, handler:{ nTimer in
@@ -68,7 +68,7 @@ public final class ServerClient {
     /**
     If one or more requests have been created with the delayedStart flag set, this is how to start them
     
-    :param: operations The operations to begin executing.
+    - parameter operations: The operations to begin executing.
     */
     public class func beginOperations(operations: [NSOperation]) {
         for op in operations {

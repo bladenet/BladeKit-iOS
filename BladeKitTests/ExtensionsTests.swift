@@ -78,13 +78,13 @@ class ExtensionsTests: XCTestCase {
     
     func testUSPhoneNumberDisplayValidWithoutOne() {
         let str = "9782139963"
-        println(str.asPhoneNumber)
+        print(str.asPhoneNumber)
         XCTAssert(str.asPhoneNumber == "(978) 213-9963", "Fail")
     }
     
     func testUSPhoneNumberDisplayValidLastSevenOnly() {
         let str = "2139963"
-        println(str.asPhoneNumber)
+        print(str.asPhoneNumber)
         XCTAssert(str.asPhoneNumber == "213-9963", "Fail")
     }
     
@@ -157,19 +157,19 @@ class ExtensionsTests: XCTestCase {
     func testSimpleRegexMatch() {
         let match = "http://www.example.com".rangeOfFirstStringMatchingUrlRegex()
         XCTAssert(match != nil, "Fail")
-        XCTAssert(distance(match!.startIndex, match!.endIndex) == 22, "Fail")
+        XCTAssert(match!.startIndex.distanceTo(match!.endIndex) == 22, "Fail")
     }
     
     func testSimpleRegexMatch2() {
         let match = "http://www.example.com/Job_1#3".rangeOfFirstStringMatchingUrlRegex()
         XCTAssert(match != nil, "Fail")
-        XCTAssert(distance(match!.startIndex, match!.endIndex) == 30, "Fail")
+        XCTAssert(match!.startIndex.distanceTo(match!.endIndex) == 30, "Fail")
     }
     
     func testSimpleRegexMatch3() {
         let match = "https://example.com/Job_1#3".rangeOfFirstStringMatchingUrlRegex()
         XCTAssert(match != nil, "Fail")
-        XCTAssert(distance(match!.startIndex, match!.endIndex) == 27, "Fail")
+        XCTAssert(match!.startIndex.distanceTo(match!.endIndex) == 27, "Fail")
     }
     
     func testSimpleRegexNonMatch() {
@@ -225,7 +225,7 @@ class ExtensionsTests: XCTestCase {
         let result = UIColor.colorFromInitials(initials)
         var hue: CGFloat = 0.0
         result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
-        println("hue \(hue)")
+        print("hue \(hue)")
         XCTAssert(hue > 0.99999999, "Fail")
         XCTAssert(hue < 1.00000001, "Fail")
     }
@@ -235,7 +235,7 @@ class ExtensionsTests: XCTestCase {
         let result = UIColor.colorFromInitials(initials)
         var hue: CGFloat = 0.0
         result.getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
-        println("hue \(hue)")
+        print("hue \(hue)")
         XCTAssert(hue > 0.99999999, "Fail")
         XCTAssert(hue < 1.00000001, "Fail")
     }
@@ -280,7 +280,7 @@ class ExtensionsTests: XCTestCase {
     
     func testRelativeDateDisplaySeconds() {
         let date = NSDate(timeIntervalSinceNow: -15.0)
-        println(date.relativeTimeDisplay())
+        print(date.relativeTimeDisplay())
         XCTAssert(date.relativeTimeDisplay() == "15 seconds ago", "Fail")
     }
     
@@ -291,19 +291,19 @@ class ExtensionsTests: XCTestCase {
     
     func testRelativeDateDisplayHours() {
         let date = NSDate(timeIntervalSinceNow: -60.0 * 60.0 * 15.0)
-        println(date.relativeTimeDisplay())
+        print(date.relativeTimeDisplay())
         XCTAssert(date.relativeTimeDisplay() == "15 hours ago", "Fail")
     }
     
     func testRelativeDateDisplayDays() {
         let date = NSDate(timeIntervalSinceNow: -60.0 * 60.0 * 24.0 * 15.0)
-        println(date.relativeTimeDisplay())
+        print(date.relativeTimeDisplay())
         XCTAssert(date.relativeTimeDisplay() == "15 days ago", "Fail")
     }
     
     func testRelativeDateDisplayMonths() {
         let date = NSDate(timeIntervalSinceNow: -60.0 * 60.0 * 24.0 * 30.0 * 2.0)
-        println(date.relativeTimeDisplay())
+        print(date.relativeTimeDisplay())
         XCTAssert(date.relativeTimeDisplay() == "2 months ago", "Fail")
     }
     

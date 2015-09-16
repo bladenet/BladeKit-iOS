@@ -15,7 +15,7 @@ extension NSCharacterSet {
         let string = String(character)
         let start = string.startIndex
         let end = string.endIndex
-        let result = string.rangeOfCharacterFromSet(self, options: nil, range: start..<end)
+        let result = string.rangeOfCharacterFromSet(self, options: [], range: start..<end)
         return result != nil
     }
 }

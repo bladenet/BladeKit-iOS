@@ -23,7 +23,13 @@ public class ServerOperation : NSOperation {
         let urlReq = self.request.urlRequest()
         var err: NSError?
         var response: NSURLResponse?
-        let data = NSURLConnection.sendSynchronousRequest(urlReq, returningResponse: &response, error: &err)
+        let data: NSData?
+        do {
+            data = try NSURLConnection.sendSynchronousRequest(urlReq, returningResponse: &response)
+        } catch let error as NSError {
+            err = error
+            data = nil
+        }
         self.response = self.request.parsingClosure(data:data, error:err)
         self.response.rawResponse = response as? NSHTTPURLResponse
     }

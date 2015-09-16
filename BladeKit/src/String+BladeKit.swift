@@ -14,8 +14,8 @@ public extension String {
     // Ability to pass an integer range in string subscripts
     public subscript(range: Range<Int>) -> String? {
         get {
-            if range.startIndex < 0 || range.startIndex > count(self) ||
-                range.endIndex > count(self) {
+            if range.startIndex < 0 || range.startIndex > self.characters.count ||
+                range.endIndex > self.characters.count {
                     return nil
             }
             return self.simpleSubstring(range.startIndex, end: range.endIndex)
@@ -26,10 +26,10 @@ public extension String {
     // Returns nill if invalid index passed
     public subscript(index: Int) -> Character? {
         get {
-            if index < 0 || index > count(self) {
+            if index < 0 || index > self.characters.count {
                 return nil
             }
-            let idx = advance(self.startIndex, index)
+            let idx = self.startIndex.advancedBy(index)
             // safety
             if idx == self.endIndex {
                 return nil
@@ -48,22 +48,22 @@ public extension String {
         }
         
         let numberComponents = self.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
-        let numbersOnly = "".join(numberComponents)
+        let numbersOnly = numberComponents.joinWithSeparator("")
         
         var formatted : String? = nil
-        if count(numbersOnly) == 11 && numbersOnly[0] == "1" {
+        if numbersOnly.characters.count == 11 && numbersOnly[0] == "1" {
             //let firstThree: String! = numbersOnly.simpleSubstring(1, end: 3)
             let firstThree: String! = numbersOnly[1...3]
             let secondThree: String! = numbersOnly[4...6]
             let lastFour: String! = numbersOnly[7...10]
             formatted = "1-\(firstThree)-\(secondThree)-\(lastFour)"
-        } else if count(numbersOnly) == 10 {
+        } else if numbersOnly.characters.count == 10 {
             //let firstThree: String! = numbersOnly.simpleSubstring(0, end: 2)
             let firstThree: String! = numbersOnly[0...2]
             let secondThree: String! = numbersOnly[3...5]
             let lastFour: String! = numbersOnly[6...9]
             formatted = "(\(firstThree)) \(secondThree)-\(lastFour)"
-        } else if count(numbersOnly) == 7 {
+        } else if numbersOnly.characters.count == 7 {
             let firstThree: String! = numbersOnly[0...2]
             let lastFour: String! = numbersOnly[3...6]
             formatted = "\(firstThree)-\(lastFour)"
@@ -78,12 +78,12 @@ public extension String {
     
     // Get substring between start and end, inclusive on for the start, non-inclusive for the end
     private func simpleSubstring(start:Int, end:Int) -> String? {
-        return self.substringWithRange(Range<String.Index>(start: advance(self.startIndex, start), end: advance(self.startIndex, end)))
+        return self.substringWithRange(Range<String.Index>(start: self.startIndex.advancedBy(start), end: self.startIndex.advancedBy(end)))
     }
     
     // See if a string contains only items in the given character set
     public func containsOnlyCharactersInSet(set: NSCharacterSet) -> Bool {
-        for character in self {
+        for character in self.characters {
             if !set.containsCharacter(character) {
                 return false
             }
@@ -99,7 +99,7 @@ public extension String {
     }
     
     public func rangeOfStringMatchingRegex(regex: String) -> Range<String.Index>? {
-        return self.rangeOfString(regex, options: (.RegularExpressionSearch | .CaseInsensitiveSearch))
+        return self.rangeOfString(regex, options: ([.RegularExpressionSearch, .CaseInsensitiveSearch]))
     }
     
     // Convert an NSRange to a Range<String.index>

@@ -34,7 +34,7 @@ class BladeKitTests: XCTestCase {
         req.headerDict["Test-HTTP-Header"] = "Test HTTP Header Value"
         XCTAssert(req.headerDict.count == 1, "Test Failure")
         XCTAssert(req.urlRequest().allHTTPHeaderFields != nil, "Test Failure")
-        println(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header"))
+        print(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header"))
         XCTAssert(req.urlRequest().valueForHTTPHeaderField("Test-HTTP-Header") == "Test HTTP Header Value", "Test Failure")
     }
     
@@ -92,7 +92,7 @@ class BladeKitTests: XCTestCase {
         let timer = ServerClient.performRepeatingRequest(req, timeInterval:0.2){ (response) -> Void in
             XCTAssert(response.rawResponse?.statusCode == 200, "Fail")
             count++
-            println(count)
+            print(count)
             if count > 1 {
                 asyncExpectation.fulfill()
             }
