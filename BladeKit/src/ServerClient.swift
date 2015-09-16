@@ -57,7 +57,6 @@ public final class ServerClient {
     :returns: NSTimer
     */
     public class func performRepeatingRequest(request: ServerRequest, timeInterval:NSTimeInterval, completion:(response: ServerResponse) -> Void) -> NSTimer {
-        let fireDate = timeInterval + CFAbsoluteTimeGetCurrent()
         let timer = NSTimer.schedule(repeatInterval: timeInterval, handler:{ nTimer in
             if nTimer.valid {
                 ServerClient.performRequest(request, completion:completion)
