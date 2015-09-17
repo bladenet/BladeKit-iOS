@@ -1,5 +1,7 @@
 # BladeKit
 
+[![forthebadge](http://forthebadge.com/images/badges/as-seen-on-tv.svg)](http://forthebadge.com)
+
 BladeKit is a friendly framework for speedier iOS development. It is written in Swift. It is intended to be lightweight, customizable, and have useful stuff for which building more stuff is easier.
 
 - Easy to import
