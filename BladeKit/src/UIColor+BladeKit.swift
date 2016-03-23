@@ -36,7 +36,7 @@ public extension UIColor {
             let denom = Double(pow(26.0, index + 1.0))
             let addition = Double(code) / denom
             total += addition
-            index++
+            index += 1
         }
         total = floor((total == 1.0) ? 255.0 : total * 256.0)
         return UIColor(hue: CGFloat(total/255.0), saturation: 170.6752/255.0, brightness: 170.0/255.0, alpha: 1.0)

@@ -78,7 +78,7 @@ public extension String {
     
     // Get substring between start and end, inclusive on for the start, non-inclusive for the end
     private func simpleSubstring(start:Int, end:Int) -> String? {
-        return self.substringWithRange(Range<String.Index>(start: self.startIndex.advancedBy(start), end: self.startIndex.advancedBy(end)))
+        return self.substringWithRange(Range<String.Index>(self.startIndex.advancedBy(start)..<self.startIndex.advancedBy(end)))
     }
     
     // See if a string contains only items in the given character set

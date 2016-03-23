@@ -91,7 +91,7 @@ class BladeKitTests: XCTestCase {
         }
         let timer = ServerClient.performRepeatingRequest(req, timeInterval:0.2){ (response) -> Void in
             XCTAssert(response.rawResponse?.statusCode == 200, "Fail")
-            count++
+            count += 1
             print(count)
             if count > 1 {
                 asyncExpectation.fulfill()
